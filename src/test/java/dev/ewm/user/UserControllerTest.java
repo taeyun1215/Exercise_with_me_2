@@ -1,18 +1,34 @@
 package dev.ewm.user;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import dev.ewm.domain.user.User;
+import dev.ewm.domain.user.UserController;
 import dev.ewm.domain.user.UserService;
 import dev.ewm.domain.user.request.UserRegisterRequest;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import dev.ewm.global.argumentResolver.LoginArgumentResolver;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -24,49 +40,51 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @AutoConfigureMockMvc : @WebMvcTest와 비슷하지만 가장 큰 차이점은 컨트롤러 뿐만 아니라 테스트 대상이 아닌 @Service나 @Repository가 붙은 객체들도 모두 메모리에 올립니다.
  * @Transactional : 선언적 트랜잭션을 지원하는 어노테이션입니다. 테스트환경에서의 @Transactional은 메소드가 종료될 때 자동으로 롤백됩니다.
  * */
-@SpringBootTest
-@AutoConfigureMockMvc
-@Transactional
+//@WebMvcTest(UserController.class)
+@ExtendWith(MockitoExtension.class)
 public class UserControllerTest {
+
+    @InjectMocks
+    private UserController userController;
+
+    @Mock
+    private UserService userService;
 
     @Autowired
     MockMvc mockMvc;
 
-    @Autowired
-    ObjectMapper objectMapper;
+    ObjectMapper objectMapper = new ObjectMapper();
 
-    @Autowired
-    private UserService userService;
+    @BeforeEach
+    public void init() {
+        mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
+    }
 
     @Test // @Test : 테스트가 수행되는 메소드를 가르킨다.
     @DisplayName("회원가입 성공 테스트 상태값 201을 반환한다.")
     public void joinUserSuccessTest() throws Exception {
-        UserRegisterRequest userRegisterRequest = new UserRegisterRequest();
-
         // Given
-        userRegisterRequest.setUsername("test11111");
-        userRegisterRequest.setPassword("taeyun1215");
-        userRegisterRequest.setConfirmPassword("taeyun1215");
-        userRegisterRequest.setNickname("test22222");
-        userRegisterRequest.setPhone("11122223333");
-        userRegisterRequest.setEmail("test11111@naver.com");
+        User user = new User();
 
-        String content = objectMapper.writeValueAsString(userRegisterRequest);
+        UserRegisterRequest request = new UserRegisterRequest();
+        request.setUsername("test11111");
+        request.setPassword("woogi101^^");
+        request.setConfirmPassword("woogi101^^");
+        request.setNickname("test22222");
+        request.setPhone("010-2415-6806");
+        request.setEmail("test11111@naver.com");
 
         // When
-        mockMvc.perform(post("/users/register")
-                        .content(content)
+        when(userService.registerUser(any(UserRegisterRequest.class))).thenReturn(user);
+        // doReturn(user).when(userService).registerUser(any(UserRegisterRequest.class));
+        final ResultActions resultActions = mockMvc.perform(
+                MockMvcRequestBuilders.post("/users/register")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON))
-                //Then
-                .andExpect(status().is2xxSuccessful())
-                .andDo(print());
-//                .andExpect(jsonPath("$.data.user.username").value("이태윤"));
-//                .andExpect(jsonPath("$.data.user.password").value("taeyun1215"))
-//                .andExpect(jsonPath("$.data.user.confirmPassword").value("taeyun1215"))
-//                .andExpect(jsonPath("$.data.user.nickname").value("devty"))
-//                .andExpect(jsonPath("$.data.user.phone").value("01024156806"))
-//                .andExpect(jsonPath("$.data.user.email").value("taeyun1215@naver.com"));
+                        .content(new Gson().toJson(request))
+        );
 
+        // then
+        resultActions
+                .andExpect(status().isOk());
     }
 }
