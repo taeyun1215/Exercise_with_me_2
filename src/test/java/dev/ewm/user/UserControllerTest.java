@@ -61,8 +61,8 @@ public class UserControllerTest {
     }
 
     @Test // @Test : 테스트가 수행되는 메소드를 가르킨다.
-    @DisplayName("회원가입 성공 테스트 상태값 201을 반환한다.")
-    public void joinUserSuccessTest() throws Exception {
+    @DisplayName("회원가입 성공 테스트")
+    public void registerUserTest() throws Exception {
         // Given
         User user = new User();
 
@@ -81,6 +81,25 @@ public class UserControllerTest {
                 MockMvcRequestBuilders.post("/users/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new Gson().toJson(request))
+        );
+
+        // then
+        resultActions
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("username 중복 테스트")
+    public void checkUsernameTest() throws Exception {
+        // Given
+        User user = new User();
+        String username = "이태윤은 없지?";
+
+        // When
+        when(userService.checkUsername(username)).thenReturn(user);
+
+        final ResultActions resultActions = mockMvc.perform(
+                MockMvcRequestBuilders.get("/users/username/"+username+"/exists")
         );
 
         // then

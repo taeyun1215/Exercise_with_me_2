@@ -50,7 +50,7 @@ public class UserController {
                     .data(username)
                     .build();
 
-            ResponseEntity.status(HttpStatus.OK).body(returnObject);
+            return ResponseEntity.status(HttpStatus.OK).body(returnObject);
         }
 
         ReturnObject returnObject = ReturnObject.builder()
