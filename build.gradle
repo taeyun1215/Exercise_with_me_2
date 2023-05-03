@@ -42,6 +42,10 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 
+	// Junit5
+	testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+	testImplementation 'org.assertj:assertj-core:3.23.1'
+
 	// Gson
 	implementation 'com.google.code.gson:gson:2.9.0'
 }
@@ -71,4 +75,8 @@ configurations {
 
 compileQuerydsl {
 	options.annotationProcessorPath = configurations.querydsl
+}
+
+test {
+	useJUnitPlatform()
 }
