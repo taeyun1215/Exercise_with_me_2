@@ -28,6 +28,8 @@ public class UserRegisterResponse {
                 .phone(user.getPhone())
                 .email(user.getEmail())
                 .role(user.getRole())
+                .createdDate(user.getCreatedDate())
+                .modifiedDate(user.getModifiedDate())
                 .build();
     }
 }

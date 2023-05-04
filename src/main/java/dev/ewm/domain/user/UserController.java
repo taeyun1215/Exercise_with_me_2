@@ -72,7 +72,7 @@ public class UserController {
                     .data(nickname)
                     .build();
 
-            ResponseEntity.status(HttpStatus.OK).body(returnObject);
+            return ResponseEntity.status(HttpStatus.OK).body(returnObject);
         }
 
         ReturnObject returnObject = ReturnObject.builder()
@@ -85,7 +85,7 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<ReturnObject> loginUser(
-            @Validated UserLoginRequest userLoginRequest,
+            @Validated @RequestBody UserLoginRequest userLoginRequest,
             HttpServletRequest request
     ) {
         User user = userService.loginUser(userLoginRequest);
