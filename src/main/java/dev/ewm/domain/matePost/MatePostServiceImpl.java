@@ -74,7 +74,7 @@ public class MatePostServiceImpl implements MatePostService {
     @Transactional
     public List<Mate> joinMate(Long matePostId, User user) {
         MatePost matePost = matePostRepo.findById(matePostId)
-                .orElseThrow(() -> new EntityNotFoundException());
+                .orElseThrow(EntityNotFoundException::new);
 
         mateRepo.findByMatePostAndUser(matePost, user).ifPresentOrElse(
                 existMate -> {
@@ -100,7 +100,7 @@ public class MatePostServiceImpl implements MatePostService {
     @Transactional
     public MatePost modifyMatePost(MatePostModifyRequest matePostModifyRequest, Long matePostId) {
         MatePost matePost = matePostRepo.findById(matePostId)
-                .orElseThrow(() -> new EntityNotFoundException());
+                .orElseThrow(EntityNotFoundException::new);
 
         matePost.updateMatePost(matePostModifyRequest);
         return matePostRepo.save(matePost);
