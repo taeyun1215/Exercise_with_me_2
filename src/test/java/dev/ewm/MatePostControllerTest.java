@@ -6,6 +6,7 @@ import dev.ewm.configure.LocalTimeSerializer;
 import dev.ewm.domain.matePost.MatePost;
 import dev.ewm.domain.matePost.repo.MatePostRepo;
 import dev.ewm.domain.matePost.request.MatePostCreateRequest;
+import dev.ewm.domain.matePost.request.MatePostModifyRequest;
 import dev.ewm.domain.user.User;
 import dev.ewm.domain.user.UserRepo;
 import dev.ewm.domain.user.constant.Role;
@@ -25,11 +26,13 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.Cookie;
 import java.time.LocalTime;
 import java.util.Optional;
 
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -94,7 +97,6 @@ public class MatePostControllerTest {
         gsonBuilder.registerTypeAdapter(LocalTime.class, new LocalTimeSerializer());
         Gson gson = gsonBuilder.setPrettyPrinting().create();
 
-
         // When
         final ResultActions resultActions = mockMvc.perform(
                 MockMvcRequestBuilders.post("/matePost/create")
@@ -106,7 +108,78 @@ public class MatePostControllerTest {
         // then
         resultActions
                 .andDo(print())
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.title", is("exercise with me")))
+                .andExpect(jsonPath("$.data.content", is("Looking for someone to exercise")))
+                .andExpect(jsonPath("$.data.gym", is("fitness center")))
+                .andExpect(jsonPath("$.data.startTime", is("15:00:00")))
+                .andExpect(jsonPath("$.data.endTime", is("16:00:00")))
+                .andExpect(jsonPath("$.data.user.username", is("test111")))
+                .andExpect(jsonPath("$.data.user.nickname", is("test")))
+                .andExpect(jsonPath("$.data.user.phone", is("010-2415-6806")))
+                .andExpect(jsonPath("$.data.user.email", is("test@naver.com")))
+                .andExpect(jsonPath("$.data.user.role", is("USER")));
     }
+
+    @Test
+    @DisplayName("운동 매칭 게시글 보기 테스트")
+    public void viewMatePostTest() throws Exception {
+        // Given
+        Optional<User> user = userRepo.findById(1L);
+
+        // When
+        final ResultActions resultActions = mockMvc.perform(
+                MockMvcRequestBuilders.get("/matePost/view/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("LOGIN_MEMBER", user.get().getUsername())
+        );
+
+        // then
+        resultActions
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.title", is("exercise with me")))
+                .andExpect(jsonPath("$.data.content", is("Looking for someone to exercise")))
+                .andExpect(jsonPath("$.data.gym", is("fitness center")))
+                .andExpect(jsonPath("$.data.view", is(1)))
+                .andExpect(cookie().value("postView", "[1]"));
+
+    }
+
+    @Test
+    @DisplayName("운동 매칭 게시글 보기 테스트")
+    public void modifyMatePostTest() throws Exception {
+        // Given
+        MatePostModifyRequest request = new MatePostModifyRequest();
+        request.setTitle("Recruitment of people to exercise");
+        request.setContent("The title is");
+        request.setGym("Jungnangcheon Stream");
+        request.setStartTime(LocalTime.parse("09:00:00"));
+        request.setEndTime(LocalTime.parse("09:30:00"));
+
+        Optional<User> user = userRepo.findById(1L);
+
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(LocalTime.class, new LocalTimeSerializer());
+        Gson gson = gsonBuilder.setPrettyPrinting().create();
+
+        // When
+        final ResultActions resultActions = mockMvc.perform(
+                MockMvcRequestBuilders.put("/matePost/modify/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(gson.toJson(request))
+                        .header("LOGIN_MEMBER", user.get().getUsername())
+        );
+
+        // then
+        resultActions
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.title", is("Recruitment of people to exercise")))
+                .andExpect(jsonPath("$.data.content", is("The title is")))
+                .andExpect(jsonPath("$.data.gym", is("Jungnangcheon Stream")));
+
+    }
+
 
 }

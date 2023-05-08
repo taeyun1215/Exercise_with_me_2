@@ -11,6 +11,7 @@ public class MatePostModifyResponse {
 
     private Long id;
     private String title;
+    private String content;
     private String gym;
     private User user;
 
@@ -18,7 +19,9 @@ public class MatePostModifyResponse {
         return MatePostModifyResponse.builder()
                 .id(matePost.getId())
                 .title(matePost.getTitle())
+                .content(matePost.getContent())
                 .gym(matePost.getGym())
+                .user(matePost.getUser())
                 .build();
     }
 }

@@ -11,6 +11,8 @@ public class MatePostDetailViewResponse {
 
     private Long id;
     private String title;
+    private String content;
+    private String gym;
     private int view;
     private User user;
 
@@ -18,7 +20,10 @@ public class MatePostDetailViewResponse {
         return MatePostDetailViewResponse.builder()
                 .id(matePost.getId())
                 .title(matePost.getTitle())
+                .content(matePost.getContent())
+                .gym(matePost.getGym())
                 .view(matePost.getView())
+                .user(matePost.getUser())
                 .build();
     }
 }
