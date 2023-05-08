@@ -123,7 +123,7 @@ public class UserControllerTest {
     }
 
     @Test
-    @DisplayName("로그인 테스트")
+    @DisplayName("로그인 성공 테스트")
     public void loginUserTest() throws Exception {
         // Given
         UserLoginRequest request = new UserLoginRequest();
