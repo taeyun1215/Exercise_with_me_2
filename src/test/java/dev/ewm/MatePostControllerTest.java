@@ -7,6 +7,7 @@ import dev.ewm.domain.matePost.MatePost;
 import dev.ewm.domain.matePost.repo.MatePostRepo;
 import dev.ewm.domain.matePost.request.MatePostCreateRequest;
 import dev.ewm.domain.matePost.request.MatePostModifyRequest;
+import dev.ewm.domain.matePost.request.MatePostSearchRequireRequest;
 import dev.ewm.domain.user.User;
 import dev.ewm.domain.user.UserRepo;
 import dev.ewm.domain.user.constant.Role;
@@ -42,9 +43,6 @@ public class MatePostControllerTest {
 
     @Autowired
     MockMvc mockMvc;
-
-    @Autowired
-    protected MockHttpSession session;
 
     @Autowired
     MatePostRepo matePostRepo;
@@ -147,7 +145,7 @@ public class MatePostControllerTest {
     }
 
     @Test
-    @DisplayName("운동 매칭 게시글 보기 테스트")
+    @DisplayName("운동 매칭 게시글 수정 테스트")
     public void modifyMatePostTest() throws Exception {
         // Given
         MatePostModifyRequest request = new MatePostModifyRequest();
@@ -179,6 +177,112 @@ public class MatePostControllerTest {
                 .andExpect(jsonPath("$.data.content", is("The title is")))
                 .andExpect(jsonPath("$.data.gym", is("Jungnangcheon Stream")));
 
+    }
+
+    @Test
+    @DisplayName("운동 매칭 게시글 참여 테스트")
+    public void joinMateTest() throws Exception {
+        // Given
+        User joinUser = User.builder()
+                .username("devty1215")
+                .password(passwordEncoder.encode("woogi101^^"))
+                .nickname("test22222")
+                .phone("010-1111-2222")
+                .email("taeyun1215@naver.com")
+                .role(Role.USER)
+                .build();
+
+        userRepo.save(joinUser);
+
+        Optional<User> user = userRepo.findById(2L);
+
+        // When
+        final ResultActions resultActions = mockMvc.perform(
+                MockMvcRequestBuilders.get("/matePost/join/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("LOGIN_MEMBER", user.get().getUsername())
+        );
+
+        // then
+        resultActions
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data[0].username", is("devty1215")))
+                .andExpect(jsonPath("$.data[0].type", is("PARTICIPANT")));
+    }
+
+    @Test
+    @DisplayName("운동 매칭 게시글 검색(제목) 테스트")
+    public void searchMatePostTitleTest() throws Exception {
+        // Given
+        MatePostSearchRequireRequest request = new MatePostSearchRequireRequest();
+        request.setTitle("exercise");
+
+        Optional<User> user = userRepo.findById(1L);
+
+        // When
+        final ResultActions resultActions = mockMvc.perform(
+                MockMvcRequestBuilders.post("/matePost/search")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new Gson().toJson(request))
+                        .header("LOGIN_MEMBER", user.get().getUsername())
+        );
+
+        // then
+        resultActions
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("운동 매칭 게시글 검색(헬스장) 테스트")
+    public void searchMatePostGymTest() throws Exception {
+        // Given
+        MatePostSearchRequireRequest request = new MatePostSearchRequireRequest();
+        request.setGym("center");
+
+        Optional<User> user = userRepo.findById(1L);
+
+        // When
+        final ResultActions resultActions = mockMvc.perform(
+                MockMvcRequestBuilders.post("/matePost/search")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new Gson().toJson(request))
+                        .header("LOGIN_MEMBER", user.get().getUsername())
+        );
+
+        // then
+        resultActions
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("운동 매칭 게시글 검색(시간) 테스트")
+    public void searchMatePostTimeTest() throws Exception {
+        // Given
+        MatePostSearchRequireRequest request = new MatePostSearchRequireRequest();
+        request.setStartTime(LocalTime.parse("14:30:00"));
+        request.setEndTime(LocalTime.parse("16:30:00"));
+
+        Optional<User> user = userRepo.findById(1L);
+
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(LocalTime.class, new LocalTimeSerializer());
+        Gson gson = gsonBuilder.setPrettyPrinting().create();
+
+        // When
+        final ResultActions resultActions = mockMvc.perform(
+                MockMvcRequestBuilders.post("/matePost/search")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(gson.toJson(request))
+                        .header("LOGIN_MEMBER", user.get().getUsername())
+        );
+
+        // then
+        resultActions
+                .andDo(print())
+                .andExpect(status().isOk());
     }
 
 

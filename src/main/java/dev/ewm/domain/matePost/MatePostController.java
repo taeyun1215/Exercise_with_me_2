@@ -63,7 +63,7 @@ public class MatePostController {
         return ResponseEntity.status(HttpStatus.OK).body(returnObject);
     }
 
-    @GetMapping("view/{matePostId}")
+    @GetMapping("/view/{matePostId}")
     public ResponseEntity<ReturnObject> viewMatePost(
             @LoginUser User user,
             @PathVariable("matePostId") Long matePostId,
@@ -122,13 +122,13 @@ public class MatePostController {
         return ResponseEntity.status(HttpStatus.OK).body(returnObject);
     }
 
-    @GetMapping("join/{matePostId}")
+    @GetMapping("/join/{matePostId}")
     public ResponseEntity<ReturnObject> joinMate(
             @LoginUser User user,
             @PathVariable("matePostId") Long matePostId
     ) {
         List<Mate> mates = matePostService.joinMate(matePostId, user);
-        MateJoinResponse response = MateJoinResponse.from(mates);
+        List<MateJoinResponse> response = MateJoinResponse.from(mates);
 
         ReturnObject returnObject = ReturnObject.builder()
                 .success(true)
@@ -138,7 +138,7 @@ public class MatePostController {
         return ResponseEntity.status(HttpStatus.OK).body(returnObject);
     }
 
-    @PutMapping("modify/{matePostId}")
+    @PutMapping("/modify/{matePostId}")
     public ResponseEntity<ReturnObject> modifyMatePost(
             @LoginUser User user,
             @PathVariable("matePostId") Long matePostId,

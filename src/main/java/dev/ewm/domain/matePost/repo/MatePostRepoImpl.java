@@ -44,7 +44,9 @@ public class MatePostRepoImpl implements MatePostRepoCustom {
     // 시간 대 검색
     private BooleanExpression betweenTime(LocalTime start, LocalTime end) {
 
-        if (end == null) {
+        if (start == null & end == null) {
+            return null;
+        } else if (end == null) {
             return matePost.startTime.goe(start);
         } else if (start == null) {
             return matePost.endTime.loe(end);
