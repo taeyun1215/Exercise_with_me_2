@@ -36,7 +36,7 @@ public class MatePostController {
             @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable
     ) {
         Page<MatePost> matePosts = matePostService.pageMatePostList(pageable);
-        MatePostPagingResponse response = MatePostPagingResponse.from(matePosts);
+        List<MatePostPagingResponse> response = MatePostPagingResponse.from(matePosts);
 
         ReturnObject returnObject = ReturnObject.builder()
                 .success(true)

@@ -12,17 +12,17 @@ import dev.ewm.domain.user.User;
 import dev.ewm.domain.user.UserRepo;
 import dev.ewm.domain.user.constant.Role;
 import dev.ewm.domain.user.request.UserLoginRequest;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.aspectj.lang.annotation.After;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
@@ -76,6 +76,12 @@ public class MatePostControllerTest {
                 .build();
 
         matePostRepo.save(matePost);
+    }
+
+    @AfterEach
+    public void clear() {
+        // 테스트용 게시글 데이터 삭제
+        matePostRepo.deleteAll();
     }
 
     @Test
@@ -285,5 +291,33 @@ public class MatePostControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    @DisplayName("운동 매칭 게시글 페이징 테스트")
+    public void pagingMatePostTest() throws Exception {
+        // Given
+        Optional<User> user = userRepo.findById(1L);
 
+        for (int i = 0; i < 30; i++) {
+            MatePost matePost = MatePost.builder()
+                    .title("title" + i)
+                    .content("content" + i)
+                    .gym("gym" + i)
+                    .startTime(LocalTime.parse("15:00:00"))
+                    .endTime(LocalTime.parse("16:00:00"))
+                    .user(user.get())
+                    .build();
+
+            matePostRepo.save(matePost);
+        }
+
+        // When
+        final MvcResult resultActions = mockMvc.perform(
+                MockMvcRequestBuilders.get("/matePost/all")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("LOGIN_MEMBER", user.get().getUsername())
+        ).andReturn();
+
+        // then
+        String response = resultActions.getResponse().getContentAsString();
+    }
 }
