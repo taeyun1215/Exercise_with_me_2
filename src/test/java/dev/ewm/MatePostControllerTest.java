@@ -11,15 +11,11 @@ import dev.ewm.domain.matePost.request.MatePostSearchRequireRequest;
 import dev.ewm.domain.user.User;
 import dev.ewm.domain.user.UserRepo;
 import dev.ewm.domain.user.constant.Role;
-import dev.ewm.domain.user.request.UserLoginRequest;
-import org.aspectj.lang.annotation.After;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -27,10 +23,10 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.Cookie;
 import java.time.LocalTime;
 import java.util.Optional;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -311,13 +307,18 @@ public class MatePostControllerTest {
         }
 
         // When
-        final MvcResult resultActions = mockMvc.perform(
+        final ResultActions resultActions = mockMvc.perform(
                 MockMvcRequestBuilders.get("/matePost/all")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("LOGIN_MEMBER", user.get().getUsername())
-        ).andReturn();
+        );
 
         // then
-        String response = resultActions.getResponse().getContentAsString();
+        resultActions
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data").isArray())
+                .andExpect(jsonPath("$.data", hasSize(10)))
+                .andExpect(jsonPath("$.data[0].title", is("title29")));
     }
 }
