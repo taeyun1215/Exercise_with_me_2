@@ -1,6 +1,6 @@
 package dev.ewm.user.adapter.in.web;
 
-import dev.ewm.domain.user.UserService;
+import dev.ewm.user.application.service.UserService;
 import dev.ewm.domain.user.request.UserLoginRequest;
 import dev.ewm.domain.user.request.UserRegisterRequest;
 import dev.ewm.domain.user.response.UserLoginResponse;
