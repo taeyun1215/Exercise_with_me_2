@@ -7,10 +7,9 @@ import dev.ewm.domain.matePost.MatePost;
 import dev.ewm.domain.matePost.repo.MatePostRepo;
 import dev.ewm.domain.matePost.request.MatePostCreateRequest;
 import dev.ewm.domain.matePost.request.MatePostModifyRequest;
-import dev.ewm.domain.user.User;
+import dev.ewm.user.domain.User;
 import dev.ewm.domain.user.UserRepo;
-import dev.ewm.domain.user.constant.Role;
-import dev.ewm.domain.user.request.UserLoginRequest;
+import dev.ewm.user.domain.constant.Role;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,7 +25,6 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.Cookie;
 import java.time.LocalTime;
 import java.util.Optional;
 

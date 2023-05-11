@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import dev.ewm.domain.base.BaseTimeEntity;
 import dev.ewm.domain.mate.constant.Type;
 import dev.ewm.domain.matePost.MatePost;
-import dev.ewm.domain.user.User;
+import dev.ewm.user.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

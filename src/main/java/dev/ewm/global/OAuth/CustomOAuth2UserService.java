@@ -1,6 +1,6 @@
 package dev.ewm.global.OAuth;
 
-import dev.ewm.domain.user.User;
+import dev.ewm.user.domain.User;
 import dev.ewm.domain.user.UserRepo;
 import dev.ewm.domain.user.response.UserLoginResponse;
 import lombok.RequiredArgsConstructor;

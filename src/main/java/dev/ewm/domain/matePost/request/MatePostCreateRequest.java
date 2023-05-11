@@ -1,7 +1,7 @@
 package dev.ewm.domain.matePost.request;
 
 import dev.ewm.domain.matePost.MatePost;
-import dev.ewm.domain.user.User;
+import dev.ewm.user.domain.User;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;

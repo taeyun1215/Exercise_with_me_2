@@ -6,7 +6,7 @@ import dev.ewm.domain.matePost.request.MatePostCreateRequest;
 import dev.ewm.domain.matePost.request.MatePostModifyRequest;
 import dev.ewm.domain.matePost.request.MatePostSearchRequireRequest;
 import dev.ewm.domain.matePost.response.*;
-import dev.ewm.domain.user.User;
+import dev.ewm.user.domain.User;
 import dev.ewm.global.annotation.LoginUser;
 import dev.ewm.global.utils.ReturnObject;
 import lombok.RequiredArgsConstructor;
