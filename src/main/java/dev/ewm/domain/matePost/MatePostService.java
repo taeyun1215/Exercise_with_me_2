@@ -4,7 +4,7 @@ import dev.ewm.domain.mate.Mate;
 import dev.ewm.domain.matePost.request.MatePostCreateRequest;
 import dev.ewm.domain.matePost.request.MatePostModifyRequest;
 import dev.ewm.domain.matePost.request.MatePostSearchRequireRequest;
-import dev.ewm.domain.user.User;
+import dev.ewm.user.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

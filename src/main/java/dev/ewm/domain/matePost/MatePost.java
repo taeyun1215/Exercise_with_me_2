@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import dev.ewm.domain.base.BaseTimeEntity;
 import dev.ewm.domain.mate.Mate;
 import dev.ewm.domain.matePost.request.MatePostModifyRequest;
-import dev.ewm.domain.user.User;
+import dev.ewm.user.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +13,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 

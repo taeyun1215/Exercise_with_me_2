@@ -1,6 +1,6 @@
 package dev.ewm.global.argumentResolver;
 
-import dev.ewm.domain.user.User;
+import dev.ewm.user.domain.User;
 import dev.ewm.domain.user.UserRepo;
 import dev.ewm.global.annotation.LoginUser;
 import lombok.RequiredArgsConstructor;

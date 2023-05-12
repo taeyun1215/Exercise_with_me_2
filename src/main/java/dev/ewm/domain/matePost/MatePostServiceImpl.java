@@ -7,7 +7,7 @@ import dev.ewm.domain.matePost.repo.MatePostRepo;
 import dev.ewm.domain.matePost.request.MatePostCreateRequest;
 import dev.ewm.domain.matePost.request.MatePostModifyRequest;
 import dev.ewm.domain.matePost.request.MatePostSearchRequireRequest;
-import dev.ewm.domain.user.User;
+import dev.ewm.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;

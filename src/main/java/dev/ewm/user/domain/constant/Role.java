@@ -1,4 +1,4 @@
-package dev.ewm.domain.user.constant;
+package dev.ewm.user.domain.constant;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

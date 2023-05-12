@@ -1,7 +1,9 @@
-package dev.ewm.domain.user;
+package dev.ewm.user.application.service;
 
+import dev.ewm.domain.user.UserRepo;
 import dev.ewm.domain.user.request.UserLoginRequest;
 import dev.ewm.domain.user.request.UserRegisterRequest;
+import dev.ewm.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;

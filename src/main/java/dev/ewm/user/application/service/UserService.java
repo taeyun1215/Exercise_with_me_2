@@ -1,7 +1,8 @@
-package dev.ewm.domain.user;
+package dev.ewm.user.application.service;
 
 import dev.ewm.domain.user.request.UserLoginRequest;
 import dev.ewm.domain.user.request.UserRegisterRequest;
+import dev.ewm.user.domain.User;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

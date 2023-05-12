@@ -1,11 +1,13 @@
-package dev.ewm.domain.user;
+package dev.ewm.user.adapter.in.web;
 
+import dev.ewm.user.application.service.UserService;
 import dev.ewm.domain.user.request.UserLoginRequest;
 import dev.ewm.domain.user.request.UserRegisterRequest;
 import dev.ewm.domain.user.response.UserLoginResponse;
 import dev.ewm.domain.user.response.UserRegisterResponse;
 import dev.ewm.global.error.ErrorCode;
 import dev.ewm.global.utils.ReturnObject;
+import dev.ewm.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

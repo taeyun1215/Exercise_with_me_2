@@ -1,7 +1,7 @@
 package dev.ewm.domain.user.request;
 
-import dev.ewm.domain.user.constant.Role;
-import dev.ewm.domain.user.User;
+import dev.ewm.user.domain.constant.Role;
+import dev.ewm.user.domain.User;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.crypto.password.PasswordEncoder;
