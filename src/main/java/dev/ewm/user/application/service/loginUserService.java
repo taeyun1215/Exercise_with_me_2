@@ -17,6 +17,7 @@ import javax.transaction.Transactional;
 @RequiredArgsConstructor
 @Transactional
 public class loginUserService implements loginUserUseCase {
+
     private final UserRepo userRepo;
     private final PasswordEncoder passwordEncoder;
 

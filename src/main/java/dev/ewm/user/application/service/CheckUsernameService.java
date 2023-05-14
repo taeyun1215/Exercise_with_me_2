@@ -5,7 +5,6 @@ import dev.ewm.global.annotation.UseCase;
 import dev.ewm.user.application.port.in.usecase.CheckUsernameUseCase;
 import dev.ewm.user.domain.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.transaction.Transactional;
 
@@ -15,7 +14,6 @@ import javax.transaction.Transactional;
 public class CheckUsernameService implements CheckUsernameUseCase {
 
     private final UserRepo userRepo;
-    private final PasswordEncoder passwordEncoder;
 
     @Override
     @Transactional

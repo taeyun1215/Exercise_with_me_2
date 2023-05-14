@@ -6,7 +6,6 @@ import dev.ewm.user.application.port.in.usecase.CheckNicknameUseCase;
 import dev.ewm.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.transaction.Transactional;
 
@@ -17,7 +16,6 @@ import javax.transaction.Transactional;
 public class CheckNicknameService implements CheckNicknameUseCase {
 
     private final UserRepo userRepo;
-    private final PasswordEncoder passwordEncoder;
 
     @Override
     @Transactional

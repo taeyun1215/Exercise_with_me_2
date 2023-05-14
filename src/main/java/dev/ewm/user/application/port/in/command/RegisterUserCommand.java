@@ -45,4 +45,21 @@ public class RegisterUserCommand extends SelfValidating<RegisterUserCommand> {
     @NotBlank(message = "이메일은 필수 입력값입니다.")
     private String email;
 
+    public RegisterUserCommand(
+            String username,
+            String password,
+            String confirmPassword,
+            String nickname,
+            String phone,
+            String email
+    ) {
+        this.username = username;
+        this.password = password;
+        this.confirmPassword = confirmPassword;
+        this.nickname = nickname;
+        this.phone = phone;
+        this.email = email;
+        this.validateSelf();
+    }
+
 }
