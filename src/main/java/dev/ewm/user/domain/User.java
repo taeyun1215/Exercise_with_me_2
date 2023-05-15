@@ -12,36 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Entity
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class User extends BaseTimeEntity implements Serializable {
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+public class User {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false, unique = true)
     private String username;
-
     private String password;
-
-    @Column(nullable = false, unique = true)
     private String nickname;
-
-    @Column(unique = true)
     private String phone;
-
-    @Column(nullable = false, unique = true)
     private String email;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private Role role;
-
-    @JsonManagedReference
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<MatePost> matePosts = new ArrayList<>();
+    private List<MatePost> matePosts;
 
 //    @JsonManagedReference
 //    @OneToMany(mappedBy = "user")
@@ -60,8 +42,11 @@ public class User extends BaseTimeEntity implements Serializable {
         return new User(id, username, password, nickname, phone, email, role, matePosts);
     }
 
-
     public String getRoleValue() {
         return this.role.getValue();
+    }
+
+    public void updateUsername(String username) {
+        this.username = username;
     }
 }

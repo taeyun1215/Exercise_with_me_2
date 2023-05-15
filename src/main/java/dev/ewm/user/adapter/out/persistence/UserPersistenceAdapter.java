@@ -2,6 +2,7 @@ package dev.ewm.user.adapter.out.persistence;
 
 import dev.ewm.global.annotation.PersistenceAdapter;
 import dev.ewm.user.application.port.out.LoadUserPort;
+import dev.ewm.user.application.port.out.SaveUserPort;
 import dev.ewm.user.application.port.out.UpdateUserStatePort;
 import dev.ewm.user.domain.User;
 import lombok.RequiredArgsConstructor;
@@ -12,10 +13,16 @@ import javax.persistence.EntityNotFoundException;
 @RequiredArgsConstructor
 @PersistenceAdapter
 public class UserPersistenceAdapter
-        implements LoadUserPort, UpdateUserStatePort {
+        implements SaveUserPort, LoadUserPort, UpdateUserStatePort {
 
     private final UserRepo userRepo;
     private final UserMapper userMapper;
+
+    @Override
+    @Transactional
+    public void saveUser(User user) {
+        userRepo.save(userMapper.mapToJpaEntity(user));
+    }
 
     @Override
     @Transactional
@@ -35,12 +42,16 @@ public class UserPersistenceAdapter
 
     @Override
     @Transactional
-    public void updateUsername(String username) {
-        UserJpaEntity userJpaEntity = userRepo.findByUsername(username).orElseThrow(
+    public void updateUsername(User user, String username) {
+        UserJpaEntity findUserJpaEntity = userRepo.findById(user.getId()).orElseThrow(
                 EntityNotFoundException::new
         );
 
-        userMapper.mapToJpaEntity()
+        User saveUser = userMapper.mapToDomainEntity(findUserJpaEntity);
+        saveUser.updateUsername(username);
+
+        userRepo.save(userMapper.mapToJpaEntity(saveUser));
     }
 
 }
+

@@ -7,18 +7,19 @@ import org.springframework.stereotype.Component;
 public class UserMapper {
 
      User mapToDomainEntity(UserJpaEntity userJpaEntity) {
-         return new User(
-                 userJpaEntity.getId(),
-                 userJpaEntity.getUsername(),
-                 userJpaEntity.getPassword(),
-                 userJpaEntity.getNickname(),
-                 userJpaEntity.getPhone(),
-                 userJpaEntity.getEmail(),
-                 userJpaEntity.getRole(),
-                 userJpaEntity.getMatePosts()
-         );
+         return User.builder()
+                 .username(userJpaEntity.getUsername())
+                 .password(userJpaEntity.getPassword())
+                 .nickname(userJpaEntity.getNickname())
+                 .phone(userJpaEntity.getPhone())
+                 .email(userJpaEntity.getEmail())
+                 .role(userJpaEntity.getRole())
+                 .build();
     }
 
-    public void mapToJpaEntity() {
+    public UserJpaEntity mapToJpaEntity(User user) {
+
+         return null;
     }
+    
 }

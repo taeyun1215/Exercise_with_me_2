@@ -1,4 +1,4 @@
-package dev.ewm.user.application.service;
+package dev.ewm.domain.user;
 
 import dev.ewm.domain.user.request.UserLoginRequest;
 import dev.ewm.domain.user.request.UserRegisterRequest;

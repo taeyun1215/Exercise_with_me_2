@@ -7,23 +7,21 @@ import dev.ewm.domain.matePost.MatePost;
 import dev.ewm.domain.matePost.repo.MatePostRepo;
 import dev.ewm.domain.matePost.request.MatePostCreateRequest;
 import dev.ewm.domain.matePost.request.MatePostModifyRequest;
-import dev.ewm.domain.user.User;
+import dev.ewm.domain.matePost.request.MatePostSearchRequireRequest;
 import dev.ewm.domain.user.UserRepo;
-import dev.ewm.domain.user.constant.Role;
+import dev.ewm.user.domain.User;
+import dev.ewm.user.domain.constant.Role;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.Cookie;
 import java.time.LocalTime;
 import java.util.Optional;
 

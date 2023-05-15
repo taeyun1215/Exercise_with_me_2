@@ -1,10 +1,9 @@
 package dev.ewm.user.application.port.in.usecase;
 
-import dev.ewm.user.application.port.in.command.RegisterUserCommand;
-import dev.ewm.user.domain.User;
+import dev.ewm.user.adapter.in.request.RegisterUserRequest;
 
 public interface RegisterUserUseCase {
 
-    User registerUser(RegisterUserCommand registerUserCommand);
+    void registerUser(RegisterUserRequest registerUserCommand);
 
 }

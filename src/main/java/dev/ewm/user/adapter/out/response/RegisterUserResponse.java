@@ -1,35 +1,27 @@
-package dev.ewm.domain.user.response;
+package dev.ewm.user.adapter.out.response;
 
 import dev.ewm.user.domain.constant.Role;
 import dev.ewm.user.domain.User;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
-
 @Getter
 @Builder
-public class UserRegisterResponse {
+public class RegisterUserResponse {
 
     private String username;
-    private String password;
     private String nickname;
     private String phone;
     private String email;
     private Role role;
-    private LocalDateTime createdDate;
-    private LocalDateTime modifiedDate;
 
-    public static UserRegisterResponse from(User user) {
-        return UserRegisterResponse.builder()
+    public static RegisterUserResponse from(User user) {
+        return RegisterUserResponse.builder()
                 .username(user.getUsername())
-                .password(user.getPassword())
                 .nickname(user.getNickname())
                 .phone(user.getPhone())
                 .email(user.getEmail())
                 .role(user.getRole())
-                .createdDate(user.getCreatedDate())
-                .modifiedDate(user.getModifiedDate())
                 .build();
     }
 }

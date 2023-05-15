@@ -2,7 +2,8 @@ package dev.ewm.user.application.service;
 
 import dev.ewm.domain.user.UserRepo;
 import dev.ewm.global.annotation.UseCase;
-import dev.ewm.user.application.port.in.usecase.CheckNicknameUseCase;
+import dev.ewm.user.application.port.in.query.CheckNicknameQuery;
+import dev.ewm.user.application.port.out.LoadUserPort;
 import dev.ewm.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,14 +14,14 @@ import javax.transaction.Transactional;
 @UseCase
 @RequiredArgsConstructor
 @Transactional
-public class CheckNicknameService implements CheckNicknameUseCase {
+public class CheckNicknameService implements CheckNicknameQuery {
 
-    private final UserRepo userRepo;
+    private final LoadUserPort loadUserPort;
 
     @Override
     @Transactional
     public User checkNickname(String nickname) {
-        return userRepo.findByNickname(nickname);
+        return loadUserPort.findByNickname(nickname);
     }
 
 }

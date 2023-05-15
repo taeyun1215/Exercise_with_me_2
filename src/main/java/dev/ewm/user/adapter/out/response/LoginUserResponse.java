@@ -1,4 +1,4 @@
-package dev.ewm.domain.user.response;
+package dev.ewm.user.adapter.out.response;
 
 import dev.ewm.user.domain.User;
 import lombok.Builder;
@@ -6,12 +6,12 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class UserLoginResponse {
+public class LoginUserResponse {
 
     private String username;
 
-    public static UserLoginResponse from(User user) {
-        return UserLoginResponse.builder()
+    public static LoginUserResponse from(User user) {
+        return LoginUserResponse.builder()
                 .username(user.getUsername())
                 .build();
     }

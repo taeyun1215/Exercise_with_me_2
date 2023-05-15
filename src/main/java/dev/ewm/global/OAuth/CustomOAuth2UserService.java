@@ -2,7 +2,7 @@ package dev.ewm.global.OAuth;
 
 import dev.ewm.user.domain.User;
 import dev.ewm.domain.user.UserRepo;
-import dev.ewm.domain.user.response.UserLoginResponse;
+import dev.ewm.user.adapter.out.response.LoginUserResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -41,7 +41,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
 
         User user = saveOrUpdate(attributes);
-        UserLoginResponse response = UserLoginResponse.from(user);
+        LoginUserResponse response = LoginUserResponse.from(user);
 
         /* 세션 정보를 저장하는 직렬화된 dto 클래스*/
         session.setAttribute(LOGIN_MEMBER, response);

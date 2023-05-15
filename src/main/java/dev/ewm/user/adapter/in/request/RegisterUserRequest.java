@@ -1,8 +1,11 @@
-package dev.ewm.user.application.port.in.command;
+package dev.ewm.user.adapter.in.request;
 
 import dev.ewm.global.common.SelfValidating;
+import dev.ewm.user.domain.User;
+import dev.ewm.user.domain.constant.Role;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -11,7 +14,7 @@ import javax.validation.constraints.Size;
 
 @Value
 @EqualsAndHashCode(callSuper = false)
-public class RegisterUserCommand extends SelfValidating<RegisterUserCommand> {
+public class RegisterUserRequest extends SelfValidating<RegisterUserRequest> {
 
     @Pattern(
             regexp = "^[a-z0-9]{4,20}$",
@@ -45,7 +48,7 @@ public class RegisterUserCommand extends SelfValidating<RegisterUserCommand> {
     @NotBlank(message = "이메일은 필수 입력값입니다.")
     private String email;
 
-    public RegisterUserCommand(
+    public RegisterUserRequest(
             String username,
             String password,
             String confirmPassword,
@@ -60,6 +63,17 @@ public class RegisterUserCommand extends SelfValidating<RegisterUserCommand> {
         this.phone = phone;
         this.email = email;
         this.validateSelf();
+    }
+
+    public User toEntity(PasswordEncoder passwordEncoder) {
+        return User.builder()
+                .username(username)
+                .password(passwordEncoder.encode(password))
+                .nickname(nickname)
+                .phone(phone)
+                .email(email)
+                .role(Role.USER)
+                .build();
     }
 
 }
