@@ -18,8 +18,16 @@ public class UserPersistenceMapper {
     }
 
     UserJpaEntity mapToJpaEntity(User user) {
-
-         return null;
+        return new UserJpaEntity(
+                user.getId(),
+                user.getUsername(),
+                user.getPassword(),
+                user.getNickname(),
+                user.getPhone(),
+                user.getEmail(),
+                user.getRole(),
+                user.getMatePosts()
+        );
     }
 
 }
