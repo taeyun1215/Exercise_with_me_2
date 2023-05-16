@@ -7,6 +7,7 @@ import dev.ewm.user.adapter.out.response.LoginUserResponse;
 import dev.ewm.user.adapter.out.response.RegisterUserResponse;
 import dev.ewm.global.error.ErrorCode;
 import dev.ewm.global.utils.ReturnObject;
+import dev.ewm.user.adapter.out.response.UserResponseMapper;
 import dev.ewm.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,7 @@ public class UserController {
     private static final String LOGIN_MEMBER = "LOGIN_MEMBER";
 
     private final UserService userService;
+    private final UserResponseMapper userResponseMapper;
 
     @PostMapping("/register")
     public ResponseEntity<ReturnObject> registerUser(

@@ -16,7 +16,7 @@ public class UserPersistenceAdapter
         implements SaveUserPort, LoadUserPort, UpdateUserStatePort {
 
     private final UserRepo userRepo;
-    private final UserMapper userMapper;
+    private final UserPersistenceMapper userMapper;
 
     @Override
     @Transactional

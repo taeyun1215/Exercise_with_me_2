@@ -10,9 +10,4 @@ public class LoginUserResponse {
 
     private String username;
 
-    public static LoginUserResponse from(User user) {
-        return LoginUserResponse.builder()
-                .username(user.getUsername())
-                .build();
-    }
 }

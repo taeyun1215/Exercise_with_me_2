@@ -1,6 +1,5 @@
 package dev.ewm.user.application.service;
 
-import dev.ewm.domain.user.UserRepo;
 import dev.ewm.global.annotation.UseCase;
 import dev.ewm.user.adapter.in.request.LoginUserRequest;
 import dev.ewm.user.application.port.in.query.CheckUsernameQuery;
@@ -24,10 +23,10 @@ public class LoginUserService implements LoginUserUseCase {
 
     @Override
     @Transactional
-    public User loginUser(LoginUserRequest loginUserCommand) {
-        User findUser = checkUsernameQuery.checkUsername(loginUserCommand.getUsername());
+    public User loginUser(LoginUserRequest loginUserRequest) {
+        User findUser = checkUsernameQuery.checkUsername(loginUserRequest.getUsername());
 
-        if (passwordEncoder.matches(loginUserCommand.getPassword(), findUser.getPassword())) {
+        if (passwordEncoder.matches(loginUserRequest.getPassword(), findUser.getPassword())) {
             log.info("로그인한 아이디 : ", findUser.getUsername());
             return findUser;
         }

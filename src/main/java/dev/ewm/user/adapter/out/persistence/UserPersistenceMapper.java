@@ -4,7 +4,7 @@ import dev.ewm.user.domain.User;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserMapper {
+public class UserPersistenceMapper {
 
      User mapToDomainEntity(UserJpaEntity userJpaEntity) {
          return User.builder()
@@ -17,9 +17,9 @@ public class UserMapper {
                  .build();
     }
 
-    public UserJpaEntity mapToJpaEntity(User user) {
+    UserJpaEntity mapToJpaEntity(User user) {
 
          return null;
     }
-    
+
 }
