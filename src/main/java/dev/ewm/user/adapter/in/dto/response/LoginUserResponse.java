@@ -1,6 +1,5 @@
-package dev.ewm.user.adapter.out.response;
+package dev.ewm.user.adapter.in.dto.response;
 
-import dev.ewm.user.domain.User;
 import lombok.Builder;
 import lombok.Getter;
 

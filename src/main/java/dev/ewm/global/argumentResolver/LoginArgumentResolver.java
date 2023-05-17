@@ -1,7 +1,8 @@
 package dev.ewm.global.argumentResolver;
 
+import dev.ewm.user.adapter.out.persistence.UserJpaEntity;
+import dev.ewm.user.adapter.out.persistence.UserRepo;
 import dev.ewm.user.domain.User;
-import dev.ewm.domain.user.UserRepo;
 import dev.ewm.global.annotation.LoginUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;
@@ -33,12 +34,10 @@ public class LoginArgumentResolver implements HandlerMethodArgumentResolver {
             final WebDataBinderFactory binderFactory
     ) {
         final String username = webRequest.getHeader(LOGIN_MEMBER);
-        User user = userRepo.findByUsername(username);
+        UserJpaEntity userJpaEntity = userRepo.findByUsername(username).orElseThrow(
+                () -> new EntityNotFoundException()
+        );
 
-        if (user == null) {
-            throw new EntityNotFoundException("회원이 존재하지 않습니다.");
-        }
-
-        return user;
+        return userJpaEntity;
     }
 }

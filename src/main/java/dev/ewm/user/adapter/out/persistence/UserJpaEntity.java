@@ -7,6 +7,7 @@ import dev.ewm.domain.base.BaseTimeEntity;
 import dev.ewm.domain.matePost.MatePost;
 import dev.ewm.user.domain.constant.Role;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,6 +18,7 @@ import java.util.List;
 @Entity
 @Table(name = "user")
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserJpaEntity extends BaseTimeEntity implements Serializable {

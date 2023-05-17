@@ -1,14 +1,9 @@
 package dev.ewm.user.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import dev.ewm.domain.base.BaseTimeEntity;
 import dev.ewm.domain.matePost.MatePost;
 import dev.ewm.user.domain.constant.Role;
 import lombok.*;
-import javax.persistence.*;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter

@@ -1,5 +1,7 @@
-package dev.ewm.user.adapter.out.response;
+package dev.ewm.user.adapter.out.persistence;
 
+import dev.ewm.user.adapter.in.dto.response.LoginUserResponse;
+import dev.ewm.user.adapter.in.dto.response.RegisterUserResponse;
 import dev.ewm.user.domain.User;
 import org.springframework.stereotype.Component;
 
@@ -7,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class UserResponseMapper {
 
     // 회원가입 리스폰
-    RegisterUserResponse mapToRegisterUserResponse(User user) {
+    public RegisterUserResponse mapToRegisterUserResponse(User user) {
         return RegisterUserResponse.builder()
                 .username(user.getUsername())
                 .nickname(user.getNickname())
@@ -18,7 +20,7 @@ public class UserResponseMapper {
     }
 
     // 로그인 리스폰
-    LoginUserResponse mapToLoginUserResponse(User user) {
+    public LoginUserResponse mapToLoginUserResponse(User user) {
         return LoginUserResponse.builder()
                 .username(user.getUsername())
                 .build();

@@ -1,4 +1,4 @@
-package dev.ewm.domain.mate.constant;
+package dev.ewm.domain.mate.domain.constant;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

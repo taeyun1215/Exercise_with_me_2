@@ -1,11 +1,9 @@
 package dev.ewm;
 
 import com.google.gson.Gson;
+import dev.ewm.user.adapter.out.persistence.UserRepo;
 import dev.ewm.user.domain.User;
-import dev.ewm.domain.user.UserRepo;
 import dev.ewm.user.domain.constant.Role;
-import dev.ewm.domain.user.request.UserLoginRequest;
-import dev.ewm.domain.user.request.UserRegisterRequest;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

@@ -2,7 +2,7 @@ package dev.ewm.domain.matePost;
 
 import dev.ewm.domain.mate.Mate;
 import dev.ewm.domain.mate.MateRepo;
-import dev.ewm.domain.mate.constant.Type;
+import dev.ewm.domain.mate.domain.constant.Type;
 import dev.ewm.domain.matePost.repo.MatePostRepo;
 import dev.ewm.domain.matePost.request.MatePostCreateRequest;
 import dev.ewm.domain.matePost.request.MatePostModifyRequest;

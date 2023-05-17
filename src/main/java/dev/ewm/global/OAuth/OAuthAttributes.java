@@ -1,5 +1,6 @@
 package dev.ewm.global.OAuth;
 
+import dev.ewm.user.adapter.out.persistence.UserJpaEntity;
 import dev.ewm.user.domain.constant.Role;
 import dev.ewm.user.domain.User;
 import lombok.AllArgsConstructor;
@@ -96,12 +97,13 @@ public class OAuthAttributes {
                 .build();
     }
 
-    public User toEntity() {
-        return User.builder()
+    public UserJpaEntity toEntity() {
+        return UserJpaEntity.builder()
                 .username(username)
                 .email(email)
                 .nickname(nickname)
                 .role(Role.SOCIAL)
                 .build();
     }
+
 }

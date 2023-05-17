@@ -1,6 +1,5 @@
 package dev.ewm.user.application.service;
 
-import dev.ewm.domain.user.UserRepo;
 import dev.ewm.global.annotation.UseCase;
 import dev.ewm.user.application.port.in.query.CheckUsernameQuery;
 import dev.ewm.user.application.port.out.LoadUserPort;

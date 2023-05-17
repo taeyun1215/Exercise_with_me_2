@@ -1,9 +1,10 @@
 package dev.ewm.user.application.service;
 
 import dev.ewm.global.annotation.UseCase;
-import dev.ewm.user.adapter.in.request.RegisterUserRequest;
+import dev.ewm.user.adapter.in.dto.request.RegisterUserRequest;
 import dev.ewm.user.application.port.in.usecase.RegisterUserUseCase;
 import dev.ewm.user.application.port.out.SaveUserPort;
+import dev.ewm.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,12 +23,15 @@ public class RegisterUserService implements RegisterUserUseCase {
 
     @Override
     @Transactional
-    public void registerUser(RegisterUserRequest registerUserCommand) {
+    public User registerUser(RegisterUserRequest registerUserCommand) {
         if (!Objects.equals(registerUserCommand.getPassword(), registerUserCommand.getConfirmPassword())) {
             throw new RuntimeException("두개의 비밀번호가 맞지 않습니다.");
         }
 
-        saveUserPort.saveUser(registerUserCommand.toEntity(passwordEncoder));
+        User saveUser = registerUserCommand.toEntity(passwordEncoder);
+        saveUserPort.saveUser(saveUser);
+
+        return saveUser;
     }
 
 }

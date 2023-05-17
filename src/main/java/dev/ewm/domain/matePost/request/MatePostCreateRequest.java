@@ -1,6 +1,7 @@
 package dev.ewm.domain.matePost.request;
 
 import dev.ewm.domain.matePost.MatePost;
+import dev.ewm.user.adapter.out.persistence.UserJpaEntity;
 import dev.ewm.user.domain.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,7 +32,7 @@ public class MatePostCreateRequest {
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime endTime;
 
-    public MatePost toEntity(User user) {
+    public MatePost toEntity(UserJpaEntity user) {
         return MatePost.builder()
                 .title(title)
                 .content(content)

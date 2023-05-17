@@ -1,16 +1,20 @@
-package dev.ewm.domain.user.request;
+package dev.ewm.user.adapter.in.dto.request;
 
-import dev.ewm.user.domain.constant.Role;
+import dev.ewm.global.common.SelfValidating;
 import dev.ewm.user.domain.User;
-import lombok.Getter;
-import lombok.Setter;
+import dev.ewm.user.domain.constant.Role;
+import lombok.EqualsAndHashCode;
+import lombok.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
-@Getter
-@Setter
-public class UserRegisterRequest {
+@Value
+@EqualsAndHashCode(callSuper = false)
+public class RegisterUserRequest extends SelfValidating<RegisterUserRequest> {
 
     @Pattern(
             regexp = "^[a-z0-9]{4,20}$",
@@ -44,6 +48,23 @@ public class UserRegisterRequest {
     @NotBlank(message = "이메일은 필수 입력값입니다.")
     private String email;
 
+    public RegisterUserRequest(
+            String username,
+            String password,
+            String confirmPassword,
+            String nickname,
+            String phone,
+            String email
+    ) {
+        this.username = username;
+        this.password = password;
+        this.confirmPassword = confirmPassword;
+        this.nickname = nickname;
+        this.phone = phone;
+        this.email = email;
+        this.validateSelf();
+    }
+
     public User toEntity(PasswordEncoder passwordEncoder) {
         return User.builder()
                 .username(username)
@@ -54,4 +75,5 @@ public class UserRegisterRequest {
                 .role(Role.USER)
                 .build();
     }
+
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import dev.ewm.domain.base.BaseTimeEntity;
 import dev.ewm.domain.mate.Mate;
 import dev.ewm.domain.matePost.request.MatePostModifyRequest;
+import dev.ewm.user.adapter.out.persistence.UserJpaEntity;
 import dev.ewm.user.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -51,7 +52,7 @@ public class MatePost extends BaseTimeEntity {
     @JsonBackReference
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "username", referencedColumnName = "username")
-    private User user;
+    private UserJpaEntity user;
 
     @OneToMany(mappedBy = "matePost", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonBackReference

@@ -1,8 +1,11 @@
 package dev.ewm.global.OAuth;
 
+import dev.ewm.user.adapter.out.persistence.UserResponseMapper;
+import dev.ewm.user.adapter.out.persistence.UserJpaEntity;
+import dev.ewm.user.adapter.out.persistence.UserPersistenceMapper;
+import dev.ewm.user.adapter.out.persistence.UserRepo;
 import dev.ewm.user.domain.User;
-import dev.ewm.domain.user.UserRepo;
-import dev.ewm.user.adapter.out.response.LoginUserResponse;
+import dev.ewm.user.adapter.in.dto.response.LoginUserResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -21,6 +24,8 @@ import java.util.Collections;
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
     private final UserRepo userRepo;
+    private final UserResponseMapper userResponseMapper;
+    private final UserPersistenceMapper userPersistenceMapper;
     private final HttpSession session;
 
     private static final String LOGIN_MEMBER = "LOGIN_MEMBER";
@@ -41,7 +46,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
 
         User user = saveOrUpdate(attributes);
-        LoginUserResponse response = LoginUserResponse.from(user);
+        LoginUserResponse response = userResponseMapper.mapToLoginUserResponse(user);
 
         /* 세션 정보를 저장하는 직렬화된 dto 클래스*/
         session.setAttribute(LOGIN_MEMBER, response);
@@ -54,9 +59,9 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     }
 
     private User saveOrUpdate(OAuthAttributes attributes) {
-        User user = userRepo.findByEmail(attributes.getEmail())
+        UserJpaEntity userJpaEntity = userRepo.findByEmail(attributes.getEmail())
                 .orElse(attributes.toEntity());
 
-        return userRepo.save(user);
+        return userPersistenceMapper.mapToDomainEntity(userJpaEntity);
     }
 }

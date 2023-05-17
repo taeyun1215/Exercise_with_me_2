@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserPersistenceMapper {
 
-     User mapToDomainEntity(UserJpaEntity userJpaEntity) {
+    public User mapToDomainEntity(UserJpaEntity userJpaEntity) {
          return User.builder()
                  .username(userJpaEntity.getUsername())
                  .password(userJpaEntity.getPassword())
@@ -17,7 +17,7 @@ public class UserPersistenceMapper {
                  .build();
     }
 
-    UserJpaEntity mapToJpaEntity(User user) {
+    public UserJpaEntity mapToJpaEntity(User user) {
         return new UserJpaEntity(
                 user.getId(),
                 user.getUsername(),

@@ -1,8 +1,8 @@
 package dev.ewm.global.config;
 
-import dev.ewm.domain.user.UserRepo;
 import dev.ewm.global.OAuth.CustomOAuth2UserService;
 import dev.ewm.global.argumentResolver.LoginArgumentResolver;
+import dev.ewm.user.adapter.out.persistence.UserRepo;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.context.annotation.Bean;

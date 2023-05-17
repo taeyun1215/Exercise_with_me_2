@@ -1,7 +1,7 @@
 package dev.ewm.domain.mate.response;
 
 import dev.ewm.domain.mate.Mate;
-import dev.ewm.domain.mate.constant.Type;
+import dev.ewm.domain.mate.domain.constant.Type;
 import lombok.Builder;
 import lombok.Getter;
 

@@ -16,18 +16,18 @@ public class UserPersistenceAdapter
         implements SaveUserPort, LoadUserPort, UpdateUserStatePort {
 
     private final UserRepo userRepo;
-    private final UserPersistenceMapper userMapper;
+    private final UserPersistenceMapper userPersistenceMapper;
 
     @Override
     @Transactional
     public void saveUser(User user) {
-        userRepo.save(userMapper.mapToJpaEntity(user));
+        userRepo.save(userPersistenceMapper.mapToJpaEntity(user));
     }
 
     @Override
     @Transactional
     public User findByUsername(String username) {
-        return userMapper.mapToDomainEntity(userRepo.findByUsername(username).orElseThrow(
+        return userPersistenceMapper.mapToDomainEntity(userRepo.findByUsername(username).orElseThrow(
                 () -> null
         ));
     }
@@ -35,7 +35,7 @@ public class UserPersistenceAdapter
     @Override
     @Transactional
     public User findByNickname(String nickname) {
-        return userMapper.mapToDomainEntity(userRepo.findByUsername(nickname).orElseThrow(
+        return userPersistenceMapper.mapToDomainEntity(userRepo.findByNickname(nickname).orElseThrow(
                 () -> null
         ));
     }
@@ -47,10 +47,10 @@ public class UserPersistenceAdapter
                 EntityNotFoundException::new
         );
 
-        User saveUser = userMapper.mapToDomainEntity(findUserJpaEntity);
+        User saveUser = userPersistenceMapper.mapToDomainEntity(findUserJpaEntity);
         saveUser.updateUsername(username);
 
-        userRepo.save(userMapper.mapToJpaEntity(saveUser));
+        userRepo.save(userPersistenceMapper.mapToJpaEntity(saveUser));
     }
 
 }

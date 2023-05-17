@@ -8,7 +8,7 @@ import dev.ewm.domain.matePost.repo.MatePostRepo;
 import dev.ewm.domain.matePost.request.MatePostCreateRequest;
 import dev.ewm.domain.matePost.request.MatePostModifyRequest;
 import dev.ewm.domain.matePost.request.MatePostSearchRequireRequest;
-import dev.ewm.domain.user.UserRepo;
+import dev.ewm.user.adapter.out.persistence.UserRepo;
 import dev.ewm.user.domain.User;
 import dev.ewm.user.domain.constant.Role;
 import org.junit.jupiter.api.*;
