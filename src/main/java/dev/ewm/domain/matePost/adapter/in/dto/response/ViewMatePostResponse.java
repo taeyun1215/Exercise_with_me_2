@@ -1,13 +1,13 @@
-package dev.ewm.domain.matePost.response;
+package dev.ewm.domain.matePost.adapter.in.dto.response;
 
-import dev.ewm.domain.matePost.MatePost;
+import dev.ewm.domain.matePost.domain.MatePost;
 import dev.ewm.user.domain.User;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 @Builder
-public class MatePostDetailViewResponse {
+public class ViewMatePostResponse {
 
     private Long id;
     private String title;
@@ -16,8 +16,8 @@ public class MatePostDetailViewResponse {
     private int view;
     private User user;
 
-    public static MatePostDetailViewResponse from(MatePost matePost) {
-        return MatePostDetailViewResponse.builder()
+    public static ViewMatePostResponse from(MatePost matePost) {
+        return ViewMatePostResponse.builder()
                 .id(matePost.getId())
                 .title(matePost.getTitle())
                 .content(matePost.getContent())

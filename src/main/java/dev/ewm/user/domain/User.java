@@ -1,6 +1,7 @@
 package dev.ewm.user.domain;
 
-import dev.ewm.domain.matePost.MatePost;
+import dev.ewm.domain.base.BaseTimeEntity;
+import dev.ewm.domain.matePost.domain.MatePost;
 import dev.ewm.user.domain.constant.Role;
 import lombok.*;
 
@@ -9,7 +10,7 @@ import java.util.List;
 @Getter
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class User {
+public class User extends BaseTimeEntity {
 
     private Long id;
     private String username;
@@ -18,6 +19,7 @@ public class User {
     private String phone;
     private String email;
     private Role role;
+
     private List<MatePost> matePosts;
 
 //    @JsonManagedReference

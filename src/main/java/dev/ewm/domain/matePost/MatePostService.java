@@ -1,9 +1,10 @@
 package dev.ewm.domain.matePost;
 
 import dev.ewm.domain.mate.Mate;
-import dev.ewm.domain.matePost.request.MatePostCreateRequest;
-import dev.ewm.domain.matePost.request.MatePostModifyRequest;
-import dev.ewm.domain.matePost.request.MatePostSearchRequireRequest;
+import dev.ewm.domain.matePost.adapter.in.dto.request.CreateMatePostRequest;
+import dev.ewm.domain.matePost.adapter.in.dto.request.ModifyMatePostRequest;
+import dev.ewm.domain.matePost.adapter.in.dto.request.SearchRequireMatePostRequest;
+import dev.ewm.domain.matePost.domain.MatePost;
 import dev.ewm.user.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +21,7 @@ public interface MatePostService {
     Page<MatePost> pageMatePostList(Pageable pageable);
 
     // 운동 메이트 게시글 검색
-    List<MatePost> searchMatePostList(MatePostSearchRequireRequest matePostSearchRequireRequest);
+    List<MatePost> searchMatePostList(SearchRequireMatePostRequest searchRequireMatePostRequest);
 
     // 운동 메이스 게시글 상세 조회, 조회수 추가(session)
     MatePost viewDetailMatePost(Long matePostId);
@@ -29,12 +30,12 @@ public interface MatePostService {
     void viewCountUpMatePost(Long matePostId);
 
     // DB 운동 메이트 게시글 저장
-    MatePost createMatePost(MatePostCreateRequest matePostCreateRequest, User user);
+    MatePost createMatePost(CreateMatePostRequest createMatePostRequest, User user);
 
     // 운동 메이트 조인
     List<Mate> joinMate(Long matePostId, User user);
 
     // 운동 메이트 게시글 수정
-    MatePost modifyMatePost(MatePostModifyRequest matePostModifyRequest, Long matePostId);
+    MatePost modifyMatePost(ModifyMatePostRequest modifyMatePostRequest, Long matePostId);
 
 }

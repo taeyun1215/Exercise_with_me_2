@@ -1,7 +1,7 @@
 package dev.ewm;
 
 import com.google.gson.Gson;
-import dev.ewm.user.adapter.out.persistence.UserRepo;
+import dev.ewm.user.adapter.out.persistence.UserJpaRepo;
 import dev.ewm.user.domain.User;
 import dev.ewm.user.domain.constant.Role;
 import org.junit.jupiter.api.*;
@@ -30,7 +30,7 @@ public class UserControllerTest {
     MockMvc mockMvc;
 
     @Autowired
-    UserRepo userRepo;
+    UserJpaRepo userJpaRepo;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -47,7 +47,7 @@ public class UserControllerTest {
                 .role(Role.USER)
                 .build();
 
-        userRepo.save(user);
+        userJpaRepo.save(user);
     }
 
     @Test // @Test : 테스트가 수행되는 메소드를 가르킨다.

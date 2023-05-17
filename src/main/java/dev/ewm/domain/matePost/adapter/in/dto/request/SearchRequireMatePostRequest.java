@@ -1,4 +1,4 @@
-package dev.ewm.domain.matePost.request;
+package dev.ewm.domain.matePost.adapter.in.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +8,7 @@ import java.time.LocalTime;
 
 @Getter
 @Setter
-public class MatePostSearchRequireRequest {
+public class SearchRequireMatePostRequest {
 
     private String title;
     private String gym;

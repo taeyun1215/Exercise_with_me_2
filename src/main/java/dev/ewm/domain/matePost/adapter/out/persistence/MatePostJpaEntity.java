@@ -1,32 +1,32 @@
-package dev.ewm.domain.matePost;
+package dev.ewm.domain.matePost.adapter.out.persistence;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import dev.ewm.domain.base.BaseTimeEntity;
 import dev.ewm.domain.mate.Mate;
-import dev.ewm.domain.matePost.request.MatePostModifyRequest;
 import dev.ewm.user.adapter.out.persistence.UserJpaEntity;
 import dev.ewm.user.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-
 import java.time.LocalTime;
 import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-@Getter
 @Entity
+@Table(name = "mate_post")
+@Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class MatePost extends BaseTimeEntity {
+@NoArgsConstructor
+public class MatePostJpaEntity extends BaseTimeEntity {
 
-    @Id @GeneratedValue(strategy = IDENTITY)
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -57,13 +57,5 @@ public class MatePost extends BaseTimeEntity {
     @OneToMany(mappedBy = "matePost", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonBackReference
     private List<Mate> mateList;
-
-    public void updateMatePost(MatePostModifyRequest matePostModifyRequest) {
-        this.title = matePostModifyRequest.getTitle();
-        this.content = matePostModifyRequest.getContent();
-        this.gym = matePostModifyRequest.getGym();
-        this.startTime = matePostModifyRequest.getStartTime();
-        this.endTime = matePostModifyRequest.getEndTime();
-    }
 
 }

@@ -1,8 +1,7 @@
-package dev.ewm.domain.matePost.request;
+package dev.ewm.domain.matePost.adapter.in.dto.request;
 
-import dev.ewm.domain.matePost.MatePost;
+import dev.ewm.domain.matePost.domain.MatePost;
 import dev.ewm.user.adapter.out.persistence.UserJpaEntity;
-import dev.ewm.user.domain.User;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,7 +12,7 @@ import java.time.LocalTime;
 
 @Getter
 @Setter
-public class MatePostCreateRequest {
+public class CreateMatePostRequest {
 
     @NotBlank(message = "내용은 필수 입력 값입니다.")
     private String title;

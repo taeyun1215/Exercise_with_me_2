@@ -1,6 +1,6 @@
-package dev.ewm.domain.matePost.response;
+package dev.ewm.domain.matePost.adapter.in.dto.response;
 
-import dev.ewm.domain.matePost.MatePost;
+import dev.ewm.domain.matePost.domain.MatePost;
 import dev.ewm.user.domain.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import java.time.LocalTime;
 
 @Getter
 @Builder
-public class MatePostCreateResponse {
+public class CreateMatePostResponse {
 
     private Long id;
     private String title;
@@ -20,8 +20,8 @@ public class MatePostCreateResponse {
     private LocalTime endTime;
     private User user;
 
-    public static MatePostCreateResponse from(MatePost matePost) {
-        return MatePostCreateResponse.builder()
+    public static CreateMatePostResponse from(MatePost matePost) {
+        return CreateMatePostResponse.builder()
                 .id(matePost.getId())
                 .title(matePost.getTitle())
                 .content(matePost.getContent())

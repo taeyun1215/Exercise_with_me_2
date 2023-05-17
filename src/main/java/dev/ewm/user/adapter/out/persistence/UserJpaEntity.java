@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import dev.ewm.domain.base.BaseTimeEntity;
-import dev.ewm.domain.matePost.MatePost;
+import dev.ewm.domain.matePost.adapter.out.persistence.MatePostJpaEntity;
 import dev.ewm.user.domain.constant.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -47,7 +47,7 @@ public class UserJpaEntity extends BaseTimeEntity implements Serializable {
 
     @JsonManagedReference
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<MatePost> matePosts = new ArrayList<>();
+    private List<MatePostJpaEntity> matePosts = new ArrayList<>();
 
 //    @JsonManagedReference
 //    @OneToMany(mappedBy = "user")

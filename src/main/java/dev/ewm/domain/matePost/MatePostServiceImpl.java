@@ -3,10 +3,11 @@ package dev.ewm.domain.matePost;
 import dev.ewm.domain.mate.Mate;
 import dev.ewm.domain.mate.MateRepo;
 import dev.ewm.domain.mate.domain.constant.Type;
+import dev.ewm.domain.matePost.domain.MatePost;
 import dev.ewm.domain.matePost.repo.MatePostRepo;
-import dev.ewm.domain.matePost.request.MatePostCreateRequest;
-import dev.ewm.domain.matePost.request.MatePostModifyRequest;
-import dev.ewm.domain.matePost.request.MatePostSearchRequireRequest;
+import dev.ewm.domain.matePost.adapter.in.dto.request.CreateMatePostRequest;
+import dev.ewm.domain.matePost.adapter.in.dto.request.ModifyMatePostRequest;
+import dev.ewm.domain.matePost.adapter.in.dto.request.SearchRequireMatePostRequest;
 import dev.ewm.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,8 +36,8 @@ public class MatePostServiceImpl implements MatePostService {
 
     @Override
     @Transactional
-    public List<MatePost> searchMatePostList(MatePostSearchRequireRequest matePostSearchRequireRequest) {
-        return matePostRepo.searchAll(matePostSearchRequireRequest);
+    public List<MatePost> searchMatePostList(SearchRequireMatePostRequest searchRequireMatePostRequest) {
+        return matePostRepo.searchAll(searchRequireMatePostRequest);
     }
 
     @Override
@@ -53,8 +54,8 @@ public class MatePostServiceImpl implements MatePostService {
 
     @Override
     @Transactional
-    public MatePost createMatePost(MatePostCreateRequest matePostCreateRequest, User user) {
-        MatePost matePost = matePostCreateRequest.toEntity(user);
+    public MatePost createMatePost(CreateMatePostRequest createMatePostRequest, User user) {
+        MatePost matePost = createMatePostRequest.toEntity(user);
         matePostRepo.save(matePost);
         log.info("운동 메이트 게시글이 추가됐습니다.");
 
@@ -98,11 +99,11 @@ public class MatePostServiceImpl implements MatePostService {
 
     @Override
     @Transactional
-    public MatePost modifyMatePost(MatePostModifyRequest matePostModifyRequest, Long matePostId) {
+    public MatePost modifyMatePost(ModifyMatePostRequest modifyMatePostRequest, Long matePostId) {
         MatePost matePost = matePostRepo.findById(matePostId)
                 .orElseThrow(EntityNotFoundException::new);
 
-        matePost.updateMatePost(matePostModifyRequest);
+        matePost.updateMatePost(modifyMatePostRequest);
         return matePostRepo.save(matePost);
     }
 

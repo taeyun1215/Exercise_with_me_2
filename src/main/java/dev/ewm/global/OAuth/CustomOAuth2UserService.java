@@ -3,7 +3,7 @@ package dev.ewm.global.OAuth;
 import dev.ewm.user.adapter.out.persistence.UserResponseMapper;
 import dev.ewm.user.adapter.out.persistence.UserJpaEntity;
 import dev.ewm.user.adapter.out.persistence.UserPersistenceMapper;
-import dev.ewm.user.adapter.out.persistence.UserRepo;
+import dev.ewm.user.adapter.out.persistence.UserJpaRepo;
 import dev.ewm.user.domain.User;
 import dev.ewm.user.adapter.in.dto.response.LoginUserResponse;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ import java.util.Collections;
 @Service
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
-    private final UserRepo userRepo;
+    private final UserJpaRepo userJpaRepo;
     private final UserResponseMapper userResponseMapper;
     private final UserPersistenceMapper userPersistenceMapper;
     private final HttpSession session;
@@ -59,7 +59,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     }
 
     private User saveOrUpdate(OAuthAttributes attributes) {
-        UserJpaEntity userJpaEntity = userRepo.findByEmail(attributes.getEmail())
+        UserJpaEntity userJpaEntity = userJpaRepo.findByEmail(attributes.getEmail())
                 .orElse(attributes.toEntity());
 
         return userPersistenceMapper.mapToDomainEntity(userJpaEntity);

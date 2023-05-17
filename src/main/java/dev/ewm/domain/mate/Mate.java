@@ -3,7 +3,7 @@ package dev.ewm.domain.mate;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import dev.ewm.domain.base.BaseTimeEntity;
 import dev.ewm.domain.mate.domain.constant.Type;
-import dev.ewm.domain.matePost.MatePost;
+import dev.ewm.domain.matePost.domain.MatePost;
 import dev.ewm.user.adapter.out.persistence.UserJpaEntity;
 import dev.ewm.user.domain.User;
 import lombok.AllArgsConstructor;

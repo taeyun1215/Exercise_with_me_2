@@ -15,19 +15,19 @@ import javax.persistence.EntityNotFoundException;
 public class UserPersistenceAdapter
         implements SaveUserPort, LoadUserPort, UpdateUserStatePort {
 
-    private final UserRepo userRepo;
+    private final UserJpaRepo userJpaRepo;
     private final UserPersistenceMapper userPersistenceMapper;
 
     @Override
     @Transactional
     public void saveUser(User user) {
-        userRepo.save(userPersistenceMapper.mapToJpaEntity(user));
+        userJpaRepo.save(userPersistenceMapper.mapToJpaEntity(user));
     }
 
     @Override
     @Transactional
     public User findByUsername(String username) {
-        return userPersistenceMapper.mapToDomainEntity(userRepo.findByUsername(username).orElseThrow(
+        return userPersistenceMapper.mapToDomainEntity(userJpaRepo.findByUsername(username).orElseThrow(
                 () -> null
         ));
     }
@@ -35,7 +35,7 @@ public class UserPersistenceAdapter
     @Override
     @Transactional
     public User findByNickname(String nickname) {
-        return userPersistenceMapper.mapToDomainEntity(userRepo.findByNickname(nickname).orElseThrow(
+        return userPersistenceMapper.mapToDomainEntity(userJpaRepo.findByNickname(nickname).orElseThrow(
                 () -> null
         ));
     }
@@ -43,14 +43,14 @@ public class UserPersistenceAdapter
     @Override
     @Transactional
     public void updateUsername(User user, String username) {
-        UserJpaEntity findUserJpaEntity = userRepo.findById(user.getId()).orElseThrow(
+        UserJpaEntity findUserJpaEntity = userJpaRepo.findById(user.getId()).orElseThrow(
                 EntityNotFoundException::new
         );
 
         User saveUser = userPersistenceMapper.mapToDomainEntity(findUserJpaEntity);
         saveUser.updateUsername(username);
 
-        userRepo.save(userPersistenceMapper.mapToJpaEntity(saveUser));
+        userJpaRepo.save(userPersistenceMapper.mapToJpaEntity(saveUser));
     }
 
 }

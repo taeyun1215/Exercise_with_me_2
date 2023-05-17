@@ -1,6 +1,6 @@
 package dev.ewm.domain.matePost.repo;
 
-import dev.ewm.domain.matePost.MatePost;
+import dev.ewm.domain.matePost.domain.MatePost;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

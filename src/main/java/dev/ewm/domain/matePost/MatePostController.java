@@ -2,10 +2,11 @@ package dev.ewm.domain.matePost;
 
 import dev.ewm.domain.mate.Mate;
 import dev.ewm.domain.mate.response.MateJoinResponse;
-import dev.ewm.domain.matePost.request.MatePostCreateRequest;
-import dev.ewm.domain.matePost.request.MatePostModifyRequest;
-import dev.ewm.domain.matePost.request.MatePostSearchRequireRequest;
-import dev.ewm.domain.matePost.response.*;
+import dev.ewm.domain.matePost.adapter.in.dto.request.CreateMatePostRequest;
+import dev.ewm.domain.matePost.adapter.in.dto.request.ModifyMatePostRequest;
+import dev.ewm.domain.matePost.adapter.in.dto.request.SearchRequireMatePostRequest;
+import dev.ewm.domain.matePost.adapter.in.dto.response.*;
+import dev.ewm.domain.matePost.domain.MatePost;
 import dev.ewm.user.domain.User;
 import dev.ewm.global.annotation.LoginUser;
 import dev.ewm.global.utils.ReturnObject;
@@ -36,7 +37,7 @@ public class MatePostController {
             @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable
     ) {
         Page<MatePost> matePosts = matePostService.pageMatePostList(pageable);
-        List<MatePostPagingResponse> response = MatePostPagingResponse.from(matePosts);
+        List<PagingMatePostResponse> response = PagingMatePostResponse.from(matePosts);
 
         ReturnObject returnObject = ReturnObject.builder()
                 .success(true)
@@ -49,11 +50,11 @@ public class MatePostController {
     @PostMapping("/search")
     public ResponseEntity<ReturnObject> searchMatePost(
             @LoginUser User user,
-            @RequestBody MatePostSearchRequireRequest matePostSearchRequireRequest
+            @RequestBody SearchRequireMatePostRequest searchRequireMatePostRequest
     ) {
-        List<MatePost> matePosts = matePostService.searchMatePostList(matePostSearchRequireRequest);
+        List<MatePost> matePosts = matePostService.searchMatePostList(searchRequireMatePostRequest);
 
-        MatePostSearchRequireResponse response = MatePostSearchRequireResponse.from(matePosts);
+        SearchRequireMatePostResponse response = SearchRequireMatePostResponse.from(matePosts);
 
         ReturnObject returnObject = ReturnObject.builder()
                 .success(true)
@@ -96,7 +97,7 @@ public class MatePostController {
             httpServletResponse.addCookie(newCookie);
         }
         MatePost matePost = matePostService.viewDetailMatePost(matePostId);
-        MatePostDetailViewResponse response = MatePostDetailViewResponse.from(matePost);
+        ViewMatePostResponse response = ViewMatePostResponse.from(matePost);
 
         ReturnObject returnObject = ReturnObject.builder()
                 .success(true)
@@ -109,10 +110,10 @@ public class MatePostController {
     @PostMapping("/create")
     public ResponseEntity<ReturnObject> createMatePost(
             @LoginUser User user,
-            @Validated @RequestBody MatePostCreateRequest matePostCreateRequest
+            @Validated @RequestBody CreateMatePostRequest createMatePostRequest
     ) {
-        MatePost matePost = matePostService.createMatePost(matePostCreateRequest, user);
-        MatePostCreateResponse response = MatePostCreateResponse.from(matePost);
+        MatePost matePost = matePostService.createMatePost(createMatePostRequest, user);
+        CreateMatePostResponse response = CreateMatePostResponse.from(matePost);
 
         ReturnObject returnObject = ReturnObject.builder()
                 .success(true)
@@ -142,10 +143,10 @@ public class MatePostController {
     public ResponseEntity<ReturnObject> modifyMatePost(
             @LoginUser User user,
             @PathVariable("matePostId") Long matePostId,
-            @RequestBody MatePostModifyRequest matePostModifyRequest
+            @RequestBody ModifyMatePostRequest modifyMatePostRequest
     ) {
-        MatePost matePost = matePostService.modifyMatePost(matePostModifyRequest, matePostId);
-        MatePostModifyResponse response = MatePostModifyResponse.from(matePost);
+        MatePost matePost = matePostService.modifyMatePost(modifyMatePostRequest, matePostId);
+        ModifyMatePostResponse response = ModifyMatePostResponse.from(matePost);
 
         ReturnObject returnObject = ReturnObject.builder()
                 .success(true)

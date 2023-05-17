@@ -1,16 +1,15 @@
-package dev.ewm.domain.matePost.request;
+package dev.ewm.domain.matePost.adapter.in.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Getter
 @Setter
-public class MatePostModifyRequest {
+public class ModifyMatePostRequest {
 
     @NotBlank(message = "내용은 필수 입력 값입니다.")
     private String title;

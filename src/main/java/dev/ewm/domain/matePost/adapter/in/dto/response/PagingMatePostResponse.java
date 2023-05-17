@@ -1,6 +1,6 @@
-package dev.ewm.domain.matePost.response;
+package dev.ewm.domain.matePost.adapter.in.dto.response;
 
-import dev.ewm.domain.matePost.MatePost;
+import dev.ewm.domain.matePost.domain.MatePost;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.data.domain.Page;
@@ -10,7 +10,7 @@ import java.util.List;
 
 @Getter
 @Builder
-public class MatePostPagingResponse {
+public class PagingMatePostResponse {
 
     private Long id;
     private String title;
@@ -19,23 +19,23 @@ public class MatePostPagingResponse {
     private int view;
     private int mateCount;
 
-    public static List<MatePostPagingResponse> from(Page<MatePost> matePosts) {
-        List<MatePostPagingResponse> matePostPagingResponses = new ArrayList<>();
+    public static List<PagingMatePostResponse> from(Page<MatePost> matePosts) {
+        List<PagingMatePostResponse> pagingMatePostRespons = new ArrayList<>();
 
         for (MatePost matePost : matePosts) {
-            MatePostPagingResponse matePostPagingResponse = MatePostPagingResponse.builder()
+            PagingMatePostResponse pagingMatePostResponse = PagingMatePostResponse.builder()
                     .id(matePost.getId())
                     .title(matePost.getTitle())
                     .username(matePost.getUser().getUsername())
                     .gym(matePost.getGym())
                     .view(matePost.getView())
-                    .mateCount(matePost.getMateList() == null ? 0 : matePost.getMateList().size())
+                    .mateCount(matePost.getMates() == null ? 0 : matePost.getMates().size())
                     .build();
 
-            matePostPagingResponses.add(matePostPagingResponse);
+            pagingMatePostRespons.add(pagingMatePostResponse);
         }
 
-        return matePostPagingResponses;
+        return pagingMatePostRespons;
     }
 
 }

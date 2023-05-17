@@ -2,12 +2,11 @@ package dev.ewm.domain.matePost.repo;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import dev.ewm.domain.matePost.MatePost;
+import dev.ewm.domain.matePost.domain.MatePost;
 import dev.ewm.domain.matePost.QMatePost;
-import dev.ewm.domain.matePost.request.MatePostSearchRequireRequest;
+import dev.ewm.domain.matePost.adapter.in.dto.request.SearchRequireMatePostRequest;
 import lombok.RequiredArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -18,14 +17,14 @@ public class MatePostRepoImpl implements MatePostRepoCustom {
     private final QMatePost matePost = QMatePost.matePost;
 
     @Override
-    public List<MatePost> searchAll(MatePostSearchRequireRequest matePostSearchRequireRequest) {
+    public List<MatePost> searchAll(SearchRequireMatePostRequest searchRequireMatePostRequest) {
 
         return queryFactory
                 .selectFrom(matePost)
                 .where(
-                        eqTitle(matePostSearchRequireRequest.getTitle()),
-                        eqGym(matePostSearchRequireRequest.getGym()),
-                        betweenTime(matePostSearchRequireRequest.getStartTime(), matePostSearchRequireRequest.getEndTime())
+                        eqTitle(searchRequireMatePostRequest.getTitle()),
+                        eqGym(searchRequireMatePostRequest.getGym()),
+                        betweenTime(searchRequireMatePostRequest.getStartTime(), searchRequireMatePostRequest.getEndTime())
                 )
                 .orderBy(matePost.createdDate.desc())
                 .fetch();

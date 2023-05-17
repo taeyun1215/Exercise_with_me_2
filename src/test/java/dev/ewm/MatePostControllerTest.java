@@ -3,12 +3,12 @@ package dev.ewm;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dev.ewm.configure.LocalTimeSerializer;
-import dev.ewm.domain.matePost.MatePost;
+import dev.ewm.domain.matePost.domain.MatePost;
 import dev.ewm.domain.matePost.repo.MatePostRepo;
-import dev.ewm.domain.matePost.request.MatePostCreateRequest;
-import dev.ewm.domain.matePost.request.MatePostModifyRequest;
-import dev.ewm.domain.matePost.request.MatePostSearchRequireRequest;
-import dev.ewm.user.adapter.out.persistence.UserRepo;
+import dev.ewm.domain.matePost.adapter.in.dto.request.CreateMatePostRequest;
+import dev.ewm.domain.matePost.adapter.in.dto.request.ModifyMatePostRequest;
+import dev.ewm.domain.matePost.adapter.in.dto.request.SearchRequireMatePostRequest;
+import dev.ewm.user.adapter.out.persistence.UserJpaRepo;
 import dev.ewm.user.domain.User;
 import dev.ewm.user.domain.constant.Role;
 import org.junit.jupiter.api.*;
@@ -43,7 +43,7 @@ public class MatePostControllerTest {
     MatePostRepo matePostRepo;
 
     @Autowired
-    UserRepo userRepo;
+    UserJpaRepo userJpaRepo;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -59,7 +59,7 @@ public class MatePostControllerTest {
                 .role(Role.USER)
                 .build();
 
-        userRepo.save(user);
+        userJpaRepo.save(user);
 
         MatePost matePost = MatePost.builder()
                 .title("exercise with me")
@@ -83,14 +83,14 @@ public class MatePostControllerTest {
     @DisplayName("운동 매칭 게시글 생성 테스트")
     public void createMatePostTest() throws Exception {
         // Given
-        MatePostCreateRequest request = new MatePostCreateRequest();
+        CreateMatePostRequest request = new CreateMatePostRequest();
         request.setTitle("exercise with me");
         request.setContent("Looking for someone to exercise");
         request.setGym("fitness center");
         request.setStartTime(LocalTime.parse("15:00:00"));
         request.setEndTime(LocalTime.parse("16:00:00"));
 
-        Optional<User> user = userRepo.findById(1L);
+        Optional<User> user = userJpaRepo.findById(1L);
 
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(LocalTime.class, new LocalTimeSerializer());
@@ -124,7 +124,7 @@ public class MatePostControllerTest {
     @DisplayName("운동 매칭 게시글 보기 테스트")
     public void viewMatePostTest() throws Exception {
         // Given
-        Optional<User> user = userRepo.findById(1L);
+        Optional<User> user = userJpaRepo.findById(1L);
 
         // When
         final ResultActions resultActions = mockMvc.perform(
@@ -149,14 +149,14 @@ public class MatePostControllerTest {
     @DisplayName("운동 매칭 게시글 수정 테스트")
     public void modifyMatePostTest() throws Exception {
         // Given
-        MatePostModifyRequest request = new MatePostModifyRequest();
+        ModifyMatePostRequest request = new ModifyMatePostRequest();
         request.setTitle("Recruitment of people to exercise");
         request.setContent("The title is");
         request.setGym("Jungnangcheon Stream");
         request.setStartTime(LocalTime.parse("09:00:00"));
         request.setEndTime(LocalTime.parse("09:30:00"));
 
-        Optional<User> user = userRepo.findById(1L);
+        Optional<User> user = userJpaRepo.findById(1L);
 
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(LocalTime.class, new LocalTimeSerializer());
@@ -193,9 +193,9 @@ public class MatePostControllerTest {
                 .role(Role.USER)
                 .build();
 
-        userRepo.save(joinUser);
+        userJpaRepo.save(joinUser);
 
-        Optional<User> user = userRepo.findById(2L);
+        Optional<User> user = userJpaRepo.findById(2L);
 
         // When
         final ResultActions resultActions = mockMvc.perform(
@@ -216,10 +216,10 @@ public class MatePostControllerTest {
     @DisplayName("운동 매칭 게시글 검색(제목) 테스트")
     public void searchMatePostTitleTest() throws Exception {
         // Given
-        MatePostSearchRequireRequest request = new MatePostSearchRequireRequest();
+        SearchRequireMatePostRequest request = new SearchRequireMatePostRequest();
         request.setTitle("exercise");
 
-        Optional<User> user = userRepo.findById(1L);
+        Optional<User> user = userJpaRepo.findById(1L);
 
         // When
         final ResultActions resultActions = mockMvc.perform(
@@ -239,10 +239,10 @@ public class MatePostControllerTest {
     @DisplayName("운동 매칭 게시글 검색(헬스장) 테스트")
     public void searchMatePostGymTest() throws Exception {
         // Given
-        MatePostSearchRequireRequest request = new MatePostSearchRequireRequest();
+        SearchRequireMatePostRequest request = new SearchRequireMatePostRequest();
         request.setGym("center");
 
-        Optional<User> user = userRepo.findById(1L);
+        Optional<User> user = userJpaRepo.findById(1L);
 
         // When
         final ResultActions resultActions = mockMvc.perform(
@@ -262,11 +262,11 @@ public class MatePostControllerTest {
     @DisplayName("운동 매칭 게시글 검색(시간) 테스트")
     public void searchMatePostTimeTest() throws Exception {
         // Given
-        MatePostSearchRequireRequest request = new MatePostSearchRequireRequest();
+        SearchRequireMatePostRequest request = new SearchRequireMatePostRequest();
         request.setStartTime(LocalTime.parse("14:30:00"));
         request.setEndTime(LocalTime.parse("16:30:00"));
 
-        Optional<User> user = userRepo.findById(1L);
+        Optional<User> user = userJpaRepo.findById(1L);
 
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(LocalTime.class, new LocalTimeSerializer());
@@ -290,7 +290,7 @@ public class MatePostControllerTest {
     @DisplayName("운동 매칭 게시글 페이징 테스트")
     public void pagingMatePostTest() throws Exception {
         // Given
-        Optional<User> user = userRepo.findById(1L);
+        Optional<User> user = userJpaRepo.findById(1L);
 
         for (int i = 0; i < 30; i++) {
             MatePost matePost = MatePost.builder()

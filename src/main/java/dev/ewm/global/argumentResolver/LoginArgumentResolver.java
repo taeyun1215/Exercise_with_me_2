@@ -1,8 +1,7 @@
 package dev.ewm.global.argumentResolver;
 
 import dev.ewm.user.adapter.out.persistence.UserJpaEntity;
-import dev.ewm.user.adapter.out.persistence.UserRepo;
-import dev.ewm.user.domain.User;
+import dev.ewm.user.adapter.out.persistence.UserJpaRepo;
 import dev.ewm.global.annotation.LoginUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;
@@ -19,7 +18,7 @@ import javax.persistence.EntityNotFoundException;
 public class LoginArgumentResolver implements HandlerMethodArgumentResolver {
 
     private static final String LOGIN_MEMBER = "LOGIN_MEMBER";
-    private final UserRepo userRepo;
+    private final UserJpaRepo userJpaRepo;
 
     @Override
     public boolean supportsParameter(final MethodParameter parameter) {
@@ -34,7 +33,7 @@ public class LoginArgumentResolver implements HandlerMethodArgumentResolver {
             final WebDataBinderFactory binderFactory
     ) {
         final String username = webRequest.getHeader(LOGIN_MEMBER);
-        UserJpaEntity userJpaEntity = userRepo.findByUsername(username).orElseThrow(
+        UserJpaEntity userJpaEntity = userJpaRepo.findByUsername(username).orElseThrow(
                 () -> new EntityNotFoundException()
         );
 
