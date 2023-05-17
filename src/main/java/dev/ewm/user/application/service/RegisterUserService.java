@@ -3,7 +3,7 @@ package dev.ewm.user.application.service;
 import dev.ewm.global.annotation.UseCase;
 import dev.ewm.user.adapter.in.dto.request.RegisterUserRequest;
 import dev.ewm.user.application.port.in.usecase.RegisterUserUseCase;
-import dev.ewm.user.application.port.out.SaveUserPort;
+import dev.ewm.user.application.port.out.SaveUserStatePort;
 import dev.ewm.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +18,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class RegisterUserService implements RegisterUserUseCase {
 
-    private final SaveUserPort saveUserPort;
+    private final SaveUserStatePort saveUserStatePort;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -29,7 +29,7 @@ public class RegisterUserService implements RegisterUserUseCase {
         }
 
         User saveUser = registerUserCommand.toEntity(passwordEncoder);
-        saveUserPort.saveUser(saveUser);
+        saveUserStatePort.saveUser(saveUser);
 
         return saveUser;
     }

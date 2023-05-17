@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import dev.ewm.domain.base.BaseTimeEntity;
-import dev.ewm.domain.matePost.adapter.out.persistence.MatePostJpaEntity;
+import dev.ewm.matePost.adapter.out.persistence.MatePostJpaEntity;
 import dev.ewm.user.domain.constant.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

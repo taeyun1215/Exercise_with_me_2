@@ -1,7 +1,7 @@
 package dev.ewm.user.domain;
 
 import dev.ewm.domain.base.BaseTimeEntity;
-import dev.ewm.domain.matePost.domain.MatePost;
+import dev.ewm.matePost.domain.MatePost;
 import dev.ewm.user.domain.constant.Role;
 import lombok.*;
 
