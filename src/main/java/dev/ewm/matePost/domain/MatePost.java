@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class MatePost extends BaseTimeEntity {
 
-    private Long id;
+    private MatePostId matePostId;
     private String title;
     private String content;
     private String gym;
@@ -22,8 +22,13 @@ public class MatePost extends BaseTimeEntity {
     private LocalTime startTime;
     private LocalTime endTime;
 
-    private User user;
+    private User.UserId userId;
     private List<Mate> mates;
+
+    @Value
+    public static class MatePostId{
+        Long value;
+    }
 
     public void updateMatePost(ModifyMatePostRequest modifyMatePostRequest) {
         this.title = modifyMatePostRequest.getTitle();

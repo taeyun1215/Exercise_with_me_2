@@ -1,4 +1,6 @@
 package dev.ewm.matePost.adapter.out.persistence;
 
-public class MatePostJpaRepo {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MatePostJpaRepo extends JpaRepository<MatePostJpaEntity, Long> {
 }

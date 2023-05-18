@@ -3,7 +3,8 @@ package dev.ewm.matePost.application.service;
 import dev.ewm.global.annotation.UseCase;
 import dev.ewm.matePost.adapter.in.dto.request.CreateMatePostRequest;
 import dev.ewm.matePost.application.port.in.usecase.CreateMatePostUseCase;
-import dev.ewm.user.application.port.out.SaveUserStatePort;
+import dev.ewm.matePost.application.port.out.SaveMatePostStatePort;
+import dev.ewm.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,11 +16,11 @@ import javax.transaction.Transactional;
 @Transactional
 public class CreateMatePostService implements CreateMatePostUseCase {
 
-    private final SaveUserStatePort saveUserStatePort;
+    private final SaveMatePostStatePort saveMatePostStatePort;
 
     @Override
-    public void createMatePost(CreateMatePostRequest createMatePostRequest) {
-
+    public void createMatePost(CreateMatePostRequest createMatePostRequest, User user) {
+        saveMatePostStatePort.saveMatePost();
     }
 
 }

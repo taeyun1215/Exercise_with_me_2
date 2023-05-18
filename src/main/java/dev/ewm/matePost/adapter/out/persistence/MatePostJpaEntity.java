@@ -56,6 +56,6 @@ public class MatePostJpaEntity extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "matePost", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonBackReference
-    private List<Mate> mateList;
+    private List<Mate> mates;
 
 }

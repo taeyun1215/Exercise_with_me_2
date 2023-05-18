@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class User extends BaseTimeEntity {
 
-    private Long id;
+    private UserId userId;
     private String username;
     private String password;
     private String nickname;
@@ -21,10 +21,12 @@ public class User extends BaseTimeEntity {
     private Role role;
 
     private List<MatePost> matePosts;
-
-//    @JsonManagedReference
-//    @OneToMany(mappedBy = "user")
 //    private List<Mate> mates = new ArrayList<>();
+
+    @Value
+    public static class UserId{
+        Long value;
+    }
 
     public static User loadUser(
             Long id,
