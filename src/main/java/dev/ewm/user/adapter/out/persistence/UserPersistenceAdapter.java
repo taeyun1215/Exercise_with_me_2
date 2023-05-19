@@ -12,7 +12,7 @@ import javax.persistence.EntityNotFoundException;
 
 @RequiredArgsConstructor
 @PersistenceAdapter
-public class UserPersistenceAdapterState
+public class UserPersistenceAdapter
         implements SaveUserStatePort, LoadUserPort, UpdateUserStatePort {
 
     private final UserJpaRepo userJpaRepo;
@@ -43,7 +43,7 @@ public class UserPersistenceAdapterState
     @Override
     @Transactional
     public void updateUsername(User user, String username) {
-        UserJpaEntity findUserJpaEntity = userJpaRepo.findById(user.getId()).orElseThrow(
+        UserJpaEntity findUserJpaEntity = userJpaRepo.findById(user.getUserId()).orElseThrow(
                 EntityNotFoundException::new
         );
 

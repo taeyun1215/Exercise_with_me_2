@@ -1,20 +1,24 @@
 package dev.ewm.matePost.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.ewm.domain.base.BaseTimeEntity;
 import dev.ewm.mate.Mate;
 import dev.ewm.matePost.adapter.in.dto.request.ModifyMatePostRequest;
+import dev.ewm.matePost.adapter.out.persistence.MatePostJpaEntity;
+import dev.ewm.user.adapter.out.persistence.UserJpaEntity;
 import dev.ewm.user.domain.User;
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.List;
 
 @Getter
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class MatePost extends BaseTimeEntity {
+public class MatePost extends BaseTimeEntity implements Serializable {
 
-    private MatePostId matePostId;
+    private Long matePostId;
     private String title;
     private String content;
     private String gym;
@@ -22,12 +26,21 @@ public class MatePost extends BaseTimeEntity {
     private LocalTime startTime;
     private LocalTime endTime;
 
-    private User.UserId userId;
+    @JsonIgnore
+    private User user;
     private List<Mate> mates;
 
-    @Value
-    public static class MatePostId{
-        Long value;
+    public MatePostJpaEntity toJpaEntity() {
+        return MatePostJpaEntity.builder()
+                .id(matePostId)
+                .title(title)
+                .content(content)
+                .gym(gym)
+                .view(view)
+                .startTime(startTime)
+                .endTime(endTime)
+                .user(user.toJpaEntity())
+                .build();
     }
 
     public void updateMatePost(ModifyMatePostRequest modifyMatePostRequest) {
