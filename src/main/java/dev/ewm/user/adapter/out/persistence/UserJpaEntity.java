@@ -45,12 +45,4 @@ public class UserJpaEntity extends BaseTimeEntity implements Serializable {
     @Column(nullable = false)
     private Role role;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<MatePostJpaEntity> matePosts = new ArrayList<>();
-
-//    @JsonManagedReference
-//    @OneToMany(mappedBy = "user")
-//    private List<Mate> mates = new ArrayList<>();
-
 }

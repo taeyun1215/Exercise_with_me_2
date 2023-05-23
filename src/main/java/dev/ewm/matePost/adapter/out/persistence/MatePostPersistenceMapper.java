@@ -1,6 +1,7 @@
 package dev.ewm.matePost.adapter.out.persistence;
 
 import dev.ewm.matePost.domain.MatePost;
+import dev.ewm.user.domain.User;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,12 +16,12 @@ public class MatePostPersistenceMapper {
                 .view(matePostJpaEntity.getView())
                 .startTime(matePostJpaEntity.getStartTime())
                 .endTime(matePostJpaEntity.getEndTime())
+                .userId(matePostJpaEntity.getUser().getId())
                 .build();
     }
 
-
-    public MatePostJpaEntity mapToJpaEntity(MatePost matePost) {
-        return matePost.toJpaEntity();
+    public MatePostJpaEntity mapToJpaEntity(MatePost matePost, User user) {
+        return matePost.toJpaEntity(user);
     }
 
 }

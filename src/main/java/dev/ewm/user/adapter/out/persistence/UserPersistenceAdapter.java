@@ -2,7 +2,7 @@ package dev.ewm.user.adapter.out.persistence;
 
 import dev.ewm.global.annotation.PersistenceAdapter;
 import dev.ewm.user.application.port.out.LoadUserPort;
-import dev.ewm.user.application.port.out.SaveUserStatePort;
+import dev.ewm.user.application.port.out.SaveUserPort;
 import dev.ewm.user.application.port.out.UpdateUserStatePort;
 import dev.ewm.user.domain.User;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ import javax.persistence.EntityNotFoundException;
 @RequiredArgsConstructor
 @PersistenceAdapter
 public class UserPersistenceAdapter
-        implements SaveUserStatePort, LoadUserPort, UpdateUserStatePort {
+        implements SaveUserPort, LoadUserPort, UpdateUserStatePort {
 
     private final UserJpaRepo userJpaRepo;
     private final UserPersistenceMapper userPersistenceMapper;

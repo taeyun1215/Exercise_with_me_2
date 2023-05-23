@@ -1,7 +1,7 @@
 package dev.ewm.user.adapter.out.persistence;
 
-import dev.ewm.user.adapter.in.dto.response.LoginUserResponse;
-import dev.ewm.user.adapter.in.dto.response.RegisterUserResponse;
+import dev.ewm.user.adapter.out.dto.LoginUserResponse;
+import dev.ewm.user.adapter.out.dto.RegisterUserResponse;
 import dev.ewm.user.domain.User;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package dev.ewm.user.adapter.in.dto.response;
+package dev.ewm.user.adapter.out.dto;
 
 import dev.ewm.user.domain.constant.Role;
 import lombok.Builder;

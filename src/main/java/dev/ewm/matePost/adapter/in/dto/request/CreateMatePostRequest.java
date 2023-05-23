@@ -2,6 +2,7 @@ package dev.ewm.matePost.adapter.in.dto.request;
 
 import dev.ewm.matePost.domain.MatePost;
 import dev.ewm.user.adapter.out.persistence.UserJpaEntity;
+import dev.ewm.user.domain.User;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -31,14 +32,14 @@ public class CreateMatePostRequest {
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime endTime;
 
-    public MatePost toEntity(UserJpaEntity user) {
+    public MatePost toEntity(User user) {
         return MatePost.builder()
                 .title(title)
                 .content(content)
                 .gym(gym)
                 .startTime(startTime)
                 .endTime(endTime)
-                .user(user)
+                .userId(user.getUserId())
                 .build();
     }
 }

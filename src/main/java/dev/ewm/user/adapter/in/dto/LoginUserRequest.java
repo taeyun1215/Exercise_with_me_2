@@ -1,4 +1,4 @@
-package dev.ewm.user.adapter.in.dto.request;
+package dev.ewm.user.adapter.in.dto;
 
 import dev.ewm.global.common.SelfValidating;
 import lombok.EqualsAndHashCode;

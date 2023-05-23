@@ -1,11 +1,9 @@
 package dev.ewm.matePost.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.ewm.domain.base.BaseTimeEntity;
 import dev.ewm.mate.Mate;
 import dev.ewm.matePost.adapter.in.dto.request.ModifyMatePostRequest;
 import dev.ewm.matePost.adapter.out.persistence.MatePostJpaEntity;
-import dev.ewm.user.adapter.out.persistence.UserJpaEntity;
 import dev.ewm.user.domain.User;
 import lombok.*;
 
@@ -26,11 +24,10 @@ public class MatePost extends BaseTimeEntity implements Serializable {
     private LocalTime startTime;
     private LocalTime endTime;
 
-    @JsonIgnore
-    private User user;
+    private Long userId;
     private List<Mate> mates;
 
-    public MatePostJpaEntity toJpaEntity() {
+    public MatePostJpaEntity toJpaEntity(User user) {
         return MatePostJpaEntity.builder()
                 .id(matePostId)
                 .title(title)
