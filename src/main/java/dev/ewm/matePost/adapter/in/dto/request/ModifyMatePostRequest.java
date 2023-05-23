@@ -1,5 +1,7 @@
 package dev.ewm.matePost.adapter.in.dto.request;
 
+import dev.ewm.matePost.domain.MatePost;
+import dev.ewm.user.domain.User;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -27,5 +29,15 @@ public class ModifyMatePostRequest {
     @NotBlank(message = "운동 끝나는 시간은 필수 입력 값입니다.")
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime endTime;
+
+    public MatePost toEntity() {
+        return MatePost.builder()
+                .title(title)
+                .content(content)
+                .gym(gym)
+                .startTime(startTime)
+                .endTime(endTime)
+                .build();
+    }
 
 }

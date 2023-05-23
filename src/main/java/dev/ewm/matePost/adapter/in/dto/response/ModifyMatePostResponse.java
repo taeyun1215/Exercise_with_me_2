@@ -17,7 +17,7 @@ public class ModifyMatePostResponse {
 
     public static ModifyMatePostResponse from(MatePost matePost) {
         return ModifyMatePostResponse.builder()
-                .id(matePost.getId())
+                .id(matePost.getMatePostId())
                 .title(matePost.getTitle())
                 .content(matePost.getContent())
                 .gym(matePost.getGym())

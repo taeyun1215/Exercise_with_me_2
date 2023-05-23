@@ -140,21 +140,5 @@ public class MatePostController {
         return ResponseEntity.status(HttpStatus.OK).body(returnObject);
     }
 
-    @PutMapping("/modify/{matePostId}")
-    public ResponseEntity<ReturnObject> modifyMatePost(
-            @LoginUser User user,
-            @PathVariable("matePostId") Long matePostId,
-            @RequestBody ModifyMatePostRequest modifyMatePostRequest
-    ) {
-        MatePost matePost = matePostService.modifyMatePost(modifyMatePostRequest, matePostId);
-        ModifyMatePostResponse response = ModifyMatePostResponse.from(matePost);
-
-        ReturnObject returnObject = ReturnObject.builder()
-                .success(true)
-                .data(response)
-                .build();
-
-        return ResponseEntity.status(HttpStatus.OK).body(returnObject);
-    }
 
 }
