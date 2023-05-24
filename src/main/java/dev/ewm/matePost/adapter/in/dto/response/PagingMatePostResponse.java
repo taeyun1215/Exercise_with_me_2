@@ -14,7 +14,7 @@ public class PagingMatePostResponse {
 
     private Long id;
     private String title;
-    private String username;
+    private String writer;
     private String gym;
     private int view;
     private int mateCount;
@@ -24,9 +24,9 @@ public class PagingMatePostResponse {
 
         for (MatePost matePost : matePosts) {
             PagingMatePostResponse pagingMatePostResponse = PagingMatePostResponse.builder()
-                    .id(matePost.getId())
+                    .id(matePost.getMatePostId())
                     .title(matePost.getTitle())
-                    .username(matePost.getUser().getUsername())
+                    .writer(matePost.getWriter())
                     .gym(matePost.getGym())
                     .view(matePost.getView())
                     .mateCount(matePost.getMates() == null ? 0 : matePost.getMates().size())

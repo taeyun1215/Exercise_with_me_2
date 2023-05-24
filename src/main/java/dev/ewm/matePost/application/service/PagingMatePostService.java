@@ -2,6 +2,7 @@ package dev.ewm.matePost.application.service;
 
 import dev.ewm.global.annotation.UseCase;
 import dev.ewm.matePost.application.port.in.query.PagingMatePostQuery;
+import dev.ewm.matePost.application.port.out.PagingMatePostPort;
 import dev.ewm.matePost.domain.MatePost;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,11 +17,11 @@ import javax.transaction.Transactional;
 @Transactional
 public class PagingMatePostService implements PagingMatePostQuery {
 
-    private final PagingMatePostQuery pagingMatePostQuery;
+    private final PagingMatePostPort pagingMatePostPort;
 
     @Override
     public Page<MatePost> pageMatePostList(Pageable pageable) {
-        return null;
+        return pagingMatePostPort.pageMatePostList(pageable);
     }
 
 }

@@ -4,6 +4,9 @@ import dev.ewm.matePost.domain.MatePost;
 import dev.ewm.user.domain.User;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class MatePostPersistenceMapper {
 
@@ -19,6 +22,15 @@ public class MatePostPersistenceMapper {
                 .userId(matePostJpaEntity.getUser().getId())
                 .build();
     }
+
+    public List<MatePost> mapToDomainEntities(List<MatePostJpaEntity> matePostJpaEntities) {
+        List<MatePost> matePosts = new ArrayList<>();
+        for (MatePostJpaEntity matePostJpaEntity : matePostJpaEntities) {
+            matePosts.add(mapToDomainEntity(matePostJpaEntity));
+        }
+        return matePosts;
+    }
+
 
     public MatePostJpaEntity mapToJpaEntity(MatePost matePost, User user) {
         return matePost.toJpaEntity(user);

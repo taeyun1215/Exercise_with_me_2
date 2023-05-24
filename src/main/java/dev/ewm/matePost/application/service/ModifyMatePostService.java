@@ -21,7 +21,7 @@ public class ModifyMatePostService implements ModifyMatePostUseCase {
 
     @Override
     public void modifyMatePost(ModifyMatePostRequest modifyMatePostRequest, Long matePostId, User user) {
-        MatePost matePost = modifyMatePostRequest.toEntity();
+        MatePost matePost = modifyMatePostRequest.toEntity(user);
         modifyMatePostStatePort.modifyMatePost(matePost, user);
     }
 

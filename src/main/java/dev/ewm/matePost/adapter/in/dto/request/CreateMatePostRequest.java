@@ -37,6 +37,7 @@ public class CreateMatePostRequest {
                 .title(title)
                 .content(content)
                 .gym(gym)
+                .writer(user.getNickname())
                 .startTime(startTime)
                 .endTime(endTime)
                 .userId(user.getUserId())

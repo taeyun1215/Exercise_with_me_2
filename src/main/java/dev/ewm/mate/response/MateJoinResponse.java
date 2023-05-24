@@ -23,7 +23,7 @@ public class MateJoinResponse {
         for (Mate mate : mates) {
             MateJoinResponse mateJoinResponse = MateJoinResponse.builder()
                     .id(mate.getId())
-                    .username(mate.getUser().getUsername())
+                    .username("")
                     .type(mate.getType())
                     .build();
 

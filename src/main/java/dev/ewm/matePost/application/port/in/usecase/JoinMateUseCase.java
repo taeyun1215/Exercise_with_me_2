@@ -5,9 +5,9 @@ import dev.ewm.user.domain.User;
 
 import java.util.List;
 
-public interface JoinMatePostUseCase {
+public interface JoinMateUseCase {
 
     // TODO : MateController에 넣어야하는지 생각하기
-    List<Mate> joinMatePost(Long matePostId, User user);
+    void joinMate(Long matePostId, User user);
 
 }

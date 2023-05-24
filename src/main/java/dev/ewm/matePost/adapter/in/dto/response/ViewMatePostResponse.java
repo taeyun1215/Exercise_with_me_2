@@ -13,17 +13,17 @@ public class ViewMatePostResponse {
     private String title;
     private String content;
     private String gym;
+    private String writer;
     private int view;
-    private User user;
 
     public static ViewMatePostResponse from(MatePost matePost) {
         return ViewMatePostResponse.builder()
-                .id(matePost.getId())
+                .id(matePost.getMatePostId())
                 .title(matePost.getTitle())
                 .content(matePost.getContent())
                 .gym(matePost.getGym())
+                .writer(matePost.getWriter())
                 .view(matePost.getView())
-                .user(matePost.getUser())
                 .build();
     }
 }

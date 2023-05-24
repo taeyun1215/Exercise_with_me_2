@@ -39,6 +39,9 @@ public class MatePostJpaEntity extends BaseTimeEntity {
     private String gym; // 헬스장 이름
 
     @Column(nullable = false)
+    private String writer; // 작성자
+
+    @Column(nullable = false)
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime startTime;
 
@@ -50,12 +53,12 @@ public class MatePostJpaEntity extends BaseTimeEntity {
     private int view = 0; // 조회수
 
     @JsonBackReference
-    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = UserJpaEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "username", referencedColumnName = "username")
     private UserJpaEntity user;
 
-    @OneToMany(mappedBy = "matePost", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonBackReference
-    private List<Mate> mates;
+//    @OneToMany(mappedBy = "matePost", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JsonBackReference
+//    private List<Mate> mates;
 
 }

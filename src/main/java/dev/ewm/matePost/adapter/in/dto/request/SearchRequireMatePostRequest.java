@@ -1,5 +1,7 @@
 package dev.ewm.matePost.adapter.in.dto.request;
 
+import dev.ewm.matePost.domain.MatePost;
+import dev.ewm.user.domain.User;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,5 +20,14 @@ public class SearchRequireMatePostRequest {
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime endTime;
+
+    public MatePost toEntity() {
+        return MatePost.builder()
+                .title(title)
+                .gym(gym)
+                .startTime(startTime)
+                .endTime(endTime)
+                .build();
+    }
 
 }

@@ -1,11 +1,9 @@
 package dev.ewm.mate;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import dev.ewm.domain.base.BaseTimeEntity;
 import dev.ewm.mate.domain.constant.Type;
-import dev.ewm.matePost.domain.MatePost;
+import dev.ewm.matePost.adapter.out.persistence.MatePostJpaEntity;
 import dev.ewm.user.adapter.out.persistence.UserJpaEntity;
-import dev.ewm.user.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,14 +27,12 @@ public class Mate extends BaseTimeEntity {
     @Column(nullable = false)
     private Type type;
 
-    @JsonBackReference
-    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = UserJpaEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "username", referencedColumnName = "username")
     private UserJpaEntity user;
 
-    @JsonBackReference
-    @ManyToOne(targetEntity = MatePost.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = MatePostJpaEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "matePostId")
-    private MatePost matePost;
+    private MatePostJpaEntity matePost;
 
 }

@@ -18,7 +18,7 @@ public class ViewCountUpMatePostService implements ViewCountUpMatePostUseCase {
 
     @Override
     public void viewCountUpMatePost(Long matePostId) {
-
+        viewCountUpMatePostStatePort.viewCountUp(matePostId);
     }
 
 }

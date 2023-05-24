@@ -19,7 +19,7 @@ public class LoadMatePostService implements LoadMatePostQuery {
 
     @Override
     public MatePost loadMatePost(Long matePostId) {
-        return null;
+        return loadMatePostPort.loadMatePost(matePostId);
     }
 
 }

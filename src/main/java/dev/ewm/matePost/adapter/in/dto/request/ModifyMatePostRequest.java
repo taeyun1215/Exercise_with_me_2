@@ -30,11 +30,12 @@ public class ModifyMatePostRequest {
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime endTime;
 
-    public MatePost toEntity() {
+    public MatePost toEntity(User user) {
         return MatePost.builder()
                 .title(title)
                 .content(content)
                 .gym(gym)
+                .writer(user.getNickname())
                 .startTime(startTime)
                 .endTime(endTime)
                 .build();

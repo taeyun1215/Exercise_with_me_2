@@ -20,6 +20,7 @@ public class MatePost extends BaseTimeEntity implements Serializable {
     private String title;
     private String content;
     private String gym;
+    private String writer;
     private int view = 0;
     private LocalTime startTime;
     private LocalTime endTime;
@@ -33,6 +34,7 @@ public class MatePost extends BaseTimeEntity implements Serializable {
                 .title(title)
                 .content(content)
                 .gym(gym)
+                .writer(writer)
                 .view(view)
                 .startTime(startTime)
                 .endTime(endTime)
