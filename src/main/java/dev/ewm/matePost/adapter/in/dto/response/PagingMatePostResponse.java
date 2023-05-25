@@ -20,7 +20,7 @@ public class PagingMatePostResponse {
     private int mateCount;
 
     public static List<PagingMatePostResponse> from(Page<MatePost> matePosts) {
-        List<PagingMatePostResponse> pagingMatePostRespons = new ArrayList<>();
+        List<PagingMatePostResponse> pagingMatePostResponses = new ArrayList<>();
 
         for (MatePost matePost : matePosts) {
             PagingMatePostResponse pagingMatePostResponse = PagingMatePostResponse.builder()
@@ -32,10 +32,10 @@ public class PagingMatePostResponse {
                     .mateCount(matePost.getMates() == null ? 0 : matePost.getMates().size())
                     .build();
 
-            pagingMatePostRespons.add(pagingMatePostResponse);
+            pagingMatePostResponses.add(pagingMatePostResponse);
         }
 
-        return pagingMatePostRespons;
+        return pagingMatePostResponses;
     }
 
 }

@@ -1,19 +1,22 @@
 package dev.ewm.matePost.adapter.in.dto.request;
 
+import dev.ewm.global.common.SelfValidating;
 import dev.ewm.matePost.domain.MatePost;
 import dev.ewm.user.adapter.out.persistence.UserJpaEntity;
 import dev.ewm.user.domain.User;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
 
-@Getter
-@Setter
-public class CreateMatePostRequest {
+@Value
+@EqualsAndHashCode(callSuper = false)
+public class CreateMatePostRequest extends SelfValidating<CreateMatePostRequest> {
 
     @NotBlank(message = "내용은 필수 입력 값입니다.")
     private String title;

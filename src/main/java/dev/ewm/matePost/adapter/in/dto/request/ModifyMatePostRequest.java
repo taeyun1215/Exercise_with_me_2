@@ -1,17 +1,20 @@
 package dev.ewm.matePost.adapter.in.dto.request;
 
+import dev.ewm.global.common.SelfValidating;
 import dev.ewm.matePost.domain.MatePost;
 import dev.ewm.user.domain.User;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalTime;
 
-@Getter
-@Setter
-public class ModifyMatePostRequest {
+@Value
+@EqualsAndHashCode(callSuper = false)
+public class ModifyMatePostRequest extends SelfValidating<ModifyMatePostRequest> {
 
     @NotBlank(message = "내용은 필수 입력 값입니다.")
     private String title;
@@ -29,16 +32,5 @@ public class ModifyMatePostRequest {
     @NotBlank(message = "운동 끝나는 시간은 필수 입력 값입니다.")
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime endTime;
-
-    public MatePost toEntity(User user) {
-        return MatePost.builder()
-                .title(title)
-                .content(content)
-                .gym(gym)
-                .writer(user.getNickname())
-                .startTime(startTime)
-                .endTime(endTime)
-                .build();
-    }
 
 }

@@ -3,6 +3,7 @@ package dev.ewm.global.config;
 import dev.ewm.global.OAuth.CustomOAuth2UserService;
 import dev.ewm.global.argumentResolver.LoginArgumentResolver;
 import dev.ewm.user.adapter.out.persistence.UserJpaRepo;
+import dev.ewm.user.adapter.out.persistence.UserPersistenceMapper;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.context.annotation.Bean;
@@ -26,6 +27,7 @@ public class SecurityConfig implements WebMvcConfigurer {
     private final CustomOAuth2UserService customOAuth2UserService;
 
     private final UserJpaRepo userJpaRepo;
+    private final UserPersistenceMapper userPersistenceMapper;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -52,7 +54,7 @@ public class SecurityConfig implements WebMvcConfigurer {
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(new LoginArgumentResolver(userJpaRepo));
+        resolvers.add(new LoginArgumentResolver(userJpaRepo, userPersistenceMapper));
     }
 
 }

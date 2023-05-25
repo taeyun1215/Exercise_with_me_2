@@ -25,7 +25,7 @@ public class MatePostCreateController {
     @PostMapping("/create")
     public ResponseEntity<ReturnObject> createMatePost(
             @LoginUser User user,
-            @Validated @RequestBody CreateMatePostRequest createMatePostRequest
+            @RequestBody CreateMatePostRequest createMatePostRequest
     ) {
         createMatePostUseCase.createMatePost(createMatePostRequest, user);
 

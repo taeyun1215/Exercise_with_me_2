@@ -3,6 +3,7 @@ package dev.ewm.global.argumentResolver;
 import dev.ewm.user.adapter.out.persistence.UserJpaEntity;
 import dev.ewm.user.adapter.out.persistence.UserJpaRepo;
 import dev.ewm.global.annotation.LoginUser;
+import dev.ewm.user.adapter.out.persistence.UserPersistenceMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
@@ -19,6 +20,7 @@ public class LoginArgumentResolver implements HandlerMethodArgumentResolver {
 
     private static final String LOGIN_MEMBER = "LOGIN_MEMBER";
     private final UserJpaRepo userJpaRepo;
+    private final UserPersistenceMapper userPersistenceMapper;
 
     @Override
     public boolean supportsParameter(final MethodParameter parameter) {
@@ -37,6 +39,6 @@ public class LoginArgumentResolver implements HandlerMethodArgumentResolver {
                 () -> new EntityNotFoundException()
         );
 
-        return userJpaEntity;
+        return userPersistenceMapper.mapToDomainEntity(userJpaEntity);
     }
 }

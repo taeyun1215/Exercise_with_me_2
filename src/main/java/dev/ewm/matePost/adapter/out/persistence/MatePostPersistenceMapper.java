@@ -16,6 +16,7 @@ public class MatePostPersistenceMapper {
                 .title(matePostJpaEntity.getTitle())
                 .content(matePostJpaEntity.getContent())
                 .gym(matePostJpaEntity.getGym())
+                .writer(matePostJpaEntity.getWriter())
                 .view(matePostJpaEntity.getView())
                 .startTime(matePostJpaEntity.getStartTime())
                 .endTime(matePostJpaEntity.getEndTime())
@@ -30,7 +31,6 @@ public class MatePostPersistenceMapper {
         }
         return matePosts;
     }
-
 
     public MatePostJpaEntity mapToJpaEntity(MatePost matePost, User user) {
         return matePost.toJpaEntity(user);
