@@ -2,7 +2,7 @@ package dev.ewm.matePost.adapter.in.web;
 
 import dev.ewm.global.annotation.LoginUser;
 import dev.ewm.global.utils.ReturnObject;
-import dev.ewm.matePost.adapter.in.dto.response.ViewMatePostResponse;
+import dev.ewm.matePost.adapter.out.response.ViewMatePostResponse;
 import dev.ewm.matePost.application.port.in.query.LoadMatePostQuery;
 import dev.ewm.matePost.application.port.in.usecase.ViewCountUpMatePostUseCase;
 import dev.ewm.matePost.domain.MatePost;

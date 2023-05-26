@@ -2,9 +2,7 @@ package dev.ewm.matePost.adapter.in.web;
 
 import dev.ewm.global.annotation.LoginUser;
 import dev.ewm.global.utils.ReturnObject;
-import dev.ewm.mate.Mate;
-import dev.ewm.mate.response.MateJoinResponse;
-import dev.ewm.matePost.application.port.in.usecase.JoinMateUseCase;
+import dev.ewm.mate.application.port.in.JoinMateUseCase;
 import dev.ewm.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,8 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor

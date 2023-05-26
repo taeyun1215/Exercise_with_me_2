@@ -1,10 +1,8 @@
 package dev.ewm.matePost.adapter.out.persistence;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import dev.ewm.domain.base.BaseTimeEntity;
-import dev.ewm.mate.Mate;
+import dev.ewm.global.baseEntity.BaseTimeEntity;
 import dev.ewm.user.adapter.out.persistence.UserJpaEntity;
-import dev.ewm.user.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +11,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalTime;
-import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -56,9 +53,5 @@ public class MatePostJpaEntity extends BaseTimeEntity {
     @ManyToOne(targetEntity = UserJpaEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "username", referencedColumnName = "username")
     private UserJpaEntity user;
-
-//    @OneToMany(mappedBy = "matePost", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JsonBackReference
-//    private List<Mate> mates;
 
 }

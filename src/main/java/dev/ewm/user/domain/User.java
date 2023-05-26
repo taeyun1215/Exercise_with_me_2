@@ -1,6 +1,6 @@
 package dev.ewm.user.domain;
 
-import dev.ewm.domain.base.BaseTimeEntity;
+import dev.ewm.global.baseEntity.BaseTimeEntity;
 import dev.ewm.user.adapter.out.persistence.UserJpaEntity;
 import dev.ewm.user.domain.constant.Role;
 import lombok.*;

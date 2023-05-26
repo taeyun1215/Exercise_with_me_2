@@ -1,8 +1,8 @@
 package dev.ewm.user.adapter.in.web;
 
 import dev.ewm.global.utils.ReturnObject;
-import dev.ewm.user.adapter.in.dto.RegisterUserRequest;
-import dev.ewm.user.adapter.out.dto.RegisterUserResponse;
+import dev.ewm.user.adapter.in.request.RegisterUserRequest;
+import dev.ewm.user.adapter.out.response.RegisterUserResponse;
 import dev.ewm.user.adapter.out.persistence.UserResponseMapper;
 import dev.ewm.user.application.port.in.usecase.RegisterUserUseCase;
 import dev.ewm.user.domain.User;

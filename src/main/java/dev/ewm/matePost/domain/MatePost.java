@@ -1,8 +1,8 @@
 package dev.ewm.matePost.domain;
 
-import dev.ewm.domain.base.BaseTimeEntity;
-import dev.ewm.mate.Mate;
-import dev.ewm.matePost.adapter.in.dto.request.ModifyMatePostRequest;
+import dev.ewm.global.baseEntity.BaseTimeEntity;
+import dev.ewm.mate.adapter.out.persistence.MateJpaEntity;
+import dev.ewm.matePost.adapter.in.request.ModifyMatePostRequest;
 import dev.ewm.matePost.adapter.out.persistence.MatePostJpaEntity;
 import dev.ewm.user.domain.User;
 import lombok.*;
@@ -26,7 +26,6 @@ public class MatePost extends BaseTimeEntity implements Serializable {
     private LocalTime endTime;
 
     private Long userId;
-    private List<Mate> mates;
 
     public MatePostJpaEntity toJpaEntity(User user) {
         return MatePostJpaEntity.builder()

@@ -2,7 +2,7 @@ package dev.ewm.matePost.adapter.in.web;
 
 import dev.ewm.global.annotation.LoginUser;
 import dev.ewm.global.utils.ReturnObject;
-import dev.ewm.matePost.adapter.in.dto.request.ModifyMatePostRequest;
+import dev.ewm.matePost.adapter.in.request.ModifyMatePostRequest;
 import dev.ewm.matePost.application.port.in.usecase.ModifyMatePostUseCase;
 import dev.ewm.user.domain.User;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,7 @@
 package dev.ewm.matePost.adapter.out.persistence;
 
 import dev.ewm.global.annotation.PersistenceAdapter;
+import dev.ewm.mate.application.port.out.SaveMatePort;
 import dev.ewm.matePost.application.port.out.*;
 import dev.ewm.matePost.domain.MatePost;
 import dev.ewm.user.domain.User;
@@ -15,8 +16,7 @@ import java.util.List;
 @PersistenceAdapter
 public class MatePostPersistenceAdapter
         implements LoadMatePostPort, SaveMatePostPort, ModifyMatePostStatePort,
-        SearchMatePostPort, ViewCountUpMatePostStatePort, PagingMatePostPort,
-        SaveMatePort {
+        SearchMatePostPort, ViewCountUpMatePostStatePort, PagingMatePostPort {
 
     private final MatePostJpaRepo matePostJpaRepo;
     private final MatePostPersistenceMapper matePostPersistenceMapper;
@@ -53,11 +53,5 @@ public class MatePostPersistenceAdapter
         List<MatePost> matePosts = matePostPersistenceMapper.mapToDomainEntities(matePostJpaEntityPage.getContent());
         return new PageImpl<>(matePosts, pageable, matePostJpaEntityPage.getTotalElements());
     }
-
-    @Override
-    public void saveMate(Long matePostId, User user) {
-
-    }
-
 
 }

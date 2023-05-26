@@ -1,10 +1,9 @@
 package dev.ewm.matePost.application.service;
 
 import dev.ewm.global.annotation.UseCase;
-import dev.ewm.matePost.adapter.in.dto.request.ModifyMatePostRequest;
+import dev.ewm.matePost.adapter.in.request.ModifyMatePostRequest;
 import dev.ewm.matePost.application.port.in.query.LoadMatePostQuery;
 import dev.ewm.matePost.application.port.in.usecase.ModifyMatePostUseCase;
-import dev.ewm.matePost.application.port.out.ModifyMatePostStatePort;
 import dev.ewm.matePost.application.port.out.SaveMatePostPort;
 import dev.ewm.matePost.domain.MatePost;
 import dev.ewm.user.domain.User;

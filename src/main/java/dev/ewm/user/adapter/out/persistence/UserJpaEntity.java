@@ -2,9 +2,7 @@ package dev.ewm.user.adapter.out.persistence;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import dev.ewm.domain.base.BaseTimeEntity;
-import dev.ewm.matePost.adapter.out.persistence.MatePostJpaEntity;
+import dev.ewm.global.baseEntity.BaseTimeEntity;
 import dev.ewm.user.domain.constant.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,8 +10,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "user")

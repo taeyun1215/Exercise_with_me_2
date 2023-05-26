@@ -1,7 +1,7 @@
 package dev.ewm.user.application.service;
 
 import dev.ewm.global.annotation.UseCase;
-import dev.ewm.user.adapter.in.dto.LoginUserRequest;
+import dev.ewm.user.adapter.in.request.LoginUserRequest;
 import dev.ewm.user.application.port.in.query.CheckUsernameQuery;
 import dev.ewm.user.application.port.in.usecase.LoginUserUseCase;
 import dev.ewm.user.domain.User;

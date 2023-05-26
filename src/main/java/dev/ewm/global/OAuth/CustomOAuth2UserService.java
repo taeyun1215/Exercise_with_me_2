@@ -5,7 +5,7 @@ import dev.ewm.user.adapter.out.persistence.UserJpaEntity;
 import dev.ewm.user.adapter.out.persistence.UserPersistenceMapper;
 import dev.ewm.user.adapter.out.persistence.UserJpaRepo;
 import dev.ewm.user.domain.User;
-import dev.ewm.user.adapter.out.dto.LoginUserResponse;
+import dev.ewm.user.adapter.out.response.LoginUserResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;

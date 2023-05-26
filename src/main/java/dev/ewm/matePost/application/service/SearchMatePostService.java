@@ -1,7 +1,7 @@
 package dev.ewm.matePost.application.service;
 
 import dev.ewm.global.annotation.UseCase;
-import dev.ewm.matePost.adapter.in.dto.request.SearchRequireMatePostRequest;
+import dev.ewm.matePost.adapter.in.request.SearchRequireMatePostRequest;
 import dev.ewm.matePost.application.port.in.query.SearchMatePostQuery;
 import dev.ewm.matePost.application.port.out.SearchMatePostPort;
 import dev.ewm.matePost.domain.MatePost;

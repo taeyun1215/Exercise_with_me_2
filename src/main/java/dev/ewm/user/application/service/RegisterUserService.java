@@ -1,7 +1,7 @@
 package dev.ewm.user.application.service;
 
 import dev.ewm.global.annotation.UseCase;
-import dev.ewm.user.adapter.in.dto.RegisterUserRequest;
+import dev.ewm.user.adapter.in.request.RegisterUserRequest;
 import dev.ewm.user.application.port.in.usecase.RegisterUserUseCase;
 import dev.ewm.user.application.port.out.SaveUserPort;
 import dev.ewm.user.domain.User;

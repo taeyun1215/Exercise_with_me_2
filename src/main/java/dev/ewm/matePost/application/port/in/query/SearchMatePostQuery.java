@@ -1,6 +1,6 @@
 package dev.ewm.matePost.application.port.in.query;
 
-import dev.ewm.matePost.adapter.in.dto.request.SearchRequireMatePostRequest;
+import dev.ewm.matePost.adapter.in.request.SearchRequireMatePostRequest;
 import dev.ewm.matePost.domain.MatePost;
 import dev.ewm.user.domain.User;
 

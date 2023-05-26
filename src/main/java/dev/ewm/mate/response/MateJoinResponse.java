@@ -1,6 +1,6 @@
 package dev.ewm.mate.response;
 
-import dev.ewm.mate.Mate;
+import dev.ewm.mate.adapter.out.persistence.MateJpaEntity;
 import dev.ewm.mate.domain.constant.Type;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,14 +17,14 @@ public class MateJoinResponse {
     private String username;
     private Type type;
 
-    public static List<MateJoinResponse> from(List<Mate> mates) {
+    public static List<MateJoinResponse> from(List<MateJpaEntity> mateJpaEntities) {
         List<MateJoinResponse> mateJoinResponses = new ArrayList<>();
 
-        for (Mate mate : mates) {
+        for (MateJpaEntity mateJpaEntity : mateJpaEntities) {
             MateJoinResponse mateJoinResponse = MateJoinResponse.builder()
-                    .id(mate.getId())
+                    .id(mateJpaEntity.getId())
                     .username("")
-                    .type(mate.getType())
+                    .type(mateJpaEntity.getType())
                     .build();
 
             mateJoinResponses.add(mateJoinResponse);

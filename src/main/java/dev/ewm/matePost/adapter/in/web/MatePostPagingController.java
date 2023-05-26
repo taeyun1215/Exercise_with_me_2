@@ -1,7 +1,7 @@
 package dev.ewm.matePost.adapter.in.web;
 
 import dev.ewm.global.utils.ReturnObject;
-import dev.ewm.matePost.adapter.in.dto.response.PagingMatePostResponse;
+import dev.ewm.matePost.adapter.out.response.PagingMatePostResponse;
 import dev.ewm.matePost.application.port.in.query.PagingMatePostQuery;
 import dev.ewm.matePost.domain.MatePost;
 import lombok.RequiredArgsConstructor;

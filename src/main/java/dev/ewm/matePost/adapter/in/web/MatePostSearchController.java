@@ -2,8 +2,8 @@ package dev.ewm.matePost.adapter.in.web;
 
 import dev.ewm.global.annotation.LoginUser;
 import dev.ewm.global.utils.ReturnObject;
-import dev.ewm.matePost.adapter.in.dto.request.SearchRequireMatePostRequest;
-import dev.ewm.matePost.adapter.in.dto.response.SearchRequireMatePostResponse;
+import dev.ewm.matePost.adapter.in.request.SearchRequireMatePostRequest;
+import dev.ewm.matePost.adapter.out.response.SearchRequireMatePostResponse;
 import dev.ewm.matePost.application.port.in.query.SearchMatePostQuery;
 import dev.ewm.matePost.domain.MatePost;
 import dev.ewm.user.domain.User;

@@ -1,7 +1,7 @@
 package dev.ewm.matePost.application.service;
 
 import dev.ewm.global.annotation.UseCase;
-import dev.ewm.matePost.adapter.in.dto.request.CreateMatePostRequest;
+import dev.ewm.matePost.adapter.in.request.CreateMatePostRequest;
 import dev.ewm.matePost.application.port.in.usecase.CreateMatePostUseCase;
 import dev.ewm.matePost.application.port.out.SaveMatePostPort;
 import dev.ewm.matePost.domain.MatePost;
