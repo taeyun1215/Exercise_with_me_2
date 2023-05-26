@@ -1,5 +1,6 @@
 package dev.ewm.mate.adapter.out.persistence;
 
+import dev.ewm.global.annotation.PersistenceAdapter;
 import dev.ewm.mate.application.port.out.DeleteMatePort;
 import dev.ewm.mate.application.port.out.ExistMatePort;
 import dev.ewm.mate.application.port.out.SaveMatePort;
@@ -7,7 +8,10 @@ import dev.ewm.mate.application.port.out.LoadMatePort;
 import dev.ewm.mate.domain.Mate;
 import dev.ewm.matePost.domain.MatePost;
 import dev.ewm.user.domain.User;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
+@PersistenceAdapter
 public class MatePersistenceAdapter implements
         SaveMatePort, DeleteMatePort, LoadMatePort,
         ExistMatePort {

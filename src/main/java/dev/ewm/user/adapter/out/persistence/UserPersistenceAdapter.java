@@ -27,17 +27,17 @@ public class UserPersistenceAdapter
     @Override
     @Transactional
     public User findByUsername(String username) {
-        return userPersistenceMapper.mapToDomainEntity(userJpaRepo.findByUsername(username).orElseThrow(
-                () -> null
-        ));
+        return userJpaRepo.findByUsername(username)
+                .map(userPersistenceMapper::mapToDomainEntity)
+                .orElse(null);
     }
 
     @Override
     @Transactional
     public User findByNickname(String nickname) {
-        return userPersistenceMapper.mapToDomainEntity(userJpaRepo.findByNickname(nickname).orElseThrow(
-                () -> null
-        ));
+        return userJpaRepo.findByUsername(nickname)
+                .map(userPersistenceMapper::mapToDomainEntity)
+                .orElse(null);
     }
 
     @Override

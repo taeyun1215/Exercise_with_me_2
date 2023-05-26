@@ -26,6 +26,7 @@ public class MatePost extends BaseTimeEntity implements Serializable {
     private LocalTime endTime;
 
     private Long userId;
+    private List<Long> mateIds;
 
     public MatePostJpaEntity toJpaEntity(User user) {
         return MatePostJpaEntity.builder()

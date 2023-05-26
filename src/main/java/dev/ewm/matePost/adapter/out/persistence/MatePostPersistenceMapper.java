@@ -1,16 +1,23 @@
 package dev.ewm.matePost.adapter.out.persistence;
 
+import dev.ewm.mate.adapter.out.persistence.MateJpaEntity;
+import dev.ewm.mate.domain.Mate;
 import dev.ewm.matePost.domain.MatePost;
 import dev.ewm.user.domain.User;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class MatePostPersistenceMapper {
 
     public MatePost mapToDomainEntity(MatePostJpaEntity matePostJpaEntity) {
+        List<Long> mateIds = matePostJpaEntity.getMates().stream()
+                .map(MateJpaEntity::getId)
+                .collect(Collectors.toList());
+
         return MatePost.builder()
                 .matePostId(matePostJpaEntity.getId())
                 .title(matePostJpaEntity.getTitle())
@@ -21,6 +28,7 @@ public class MatePostPersistenceMapper {
                 .startTime(matePostJpaEntity.getStartTime())
                 .endTime(matePostJpaEntity.getEndTime())
                 .userId(matePostJpaEntity.getUser().getId())
+                .mateIds(mateIds)
                 .build();
     }
 

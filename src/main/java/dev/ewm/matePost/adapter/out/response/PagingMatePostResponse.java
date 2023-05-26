@@ -29,7 +29,7 @@ public class PagingMatePostResponse {
                     .writer(matePost.getWriter())
                     .gym(matePost.getGym())
                     .view(matePost.getView())
-                    .mateCount(matePost.getMates() == null ? 0 : matePost.getMates().size())
+                    .mateCount(matePost.getMateIds() == null ? 0 : matePost.getMateIds().size())
                     .build();
 
             pagingMatePostResponses.add(pagingMatePostResponse);

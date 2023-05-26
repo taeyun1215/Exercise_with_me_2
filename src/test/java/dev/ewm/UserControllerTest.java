@@ -1,7 +1,12 @@
 package dev.ewm;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import dev.ewm.user.adapter.in.request.LoginUserRequest;
+import dev.ewm.user.adapter.in.request.RegisterUserRequest;
+import dev.ewm.user.adapter.out.persistence.UserJpaEntity;
 import dev.ewm.user.adapter.out.persistence.UserJpaRepo;
+import dev.ewm.user.application.port.in.usecase.RegisterUserUseCase;
 import dev.ewm.user.domain.User;
 import dev.ewm.user.domain.constant.Role;
 import org.junit.jupiter.api.*;
@@ -37,8 +42,7 @@ public class UserControllerTest {
 
     @BeforeEach
     public void init() {
-        User user = User.builder()
-                .id(1L)
+        UserJpaEntity user = UserJpaEntity.builder()
                 .username("test111")
                 .password(passwordEncoder.encode("비밀번호486!"))
                 .nickname("test")
@@ -50,23 +54,30 @@ public class UserControllerTest {
         userJpaRepo.save(user);
     }
 
+    @AfterEach
+    public void clear() {
+        // 테스트용 게시글 데이터 삭제
+        userJpaRepo.deleteAll();
+    }
+
     @Test // @Test : 테스트가 수행되는 메소드를 가르킨다.
     @DisplayName("회원가입 성공 테스트")
     public void registerUserTest() throws Exception {
         // Given
-        UserRegisterRequest request = new UserRegisterRequest();
-        request.setUsername("devty1215");
-        request.setPassword("woogi101^^");
-        request.setConfirmPassword("woogi101^^");
-        request.setNickname("test22222");
-        request.setPhone("010-1111-2222");
-        request.setEmail("taeyun1215@naver.com");
+        RegisterUserRequest request = new RegisterUserRequest(
+                "devty1215",
+                "woogi101^^",
+                "woogi101^^",
+                "test22222",
+                "010-1111-2222",
+                "taeyun1215@naver.com"
+        );
 
         // When
         final ResultActions resultActions = mockMvc.perform(
                 MockMvcRequestBuilders.post("/users/register")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(new Gson().toJson(request))
+                        .content(new ObjectMapper().writeValueAsString(request))
         );
 
         // then
@@ -119,15 +130,16 @@ public class UserControllerTest {
     @DisplayName("로그인 성공 테스트")
     public void loginUserTest() throws Exception {
         // Given
-        UserLoginRequest request = new UserLoginRequest();
-        request.setUsername("test111");
-        request.setPassword("비밀번호486!");
+        LoginUserRequest request = new LoginUserRequest(
+                "test111",
+                "비밀번호486!"
+        );
 
         // When
         final ResultActions resultActions = mockMvc.perform(
                 MockMvcRequestBuilders.post("/users/login")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(new Gson().toJson(request))
+                        .content(new ObjectMapper().writeValueAsString(request))
         );
 
         // then

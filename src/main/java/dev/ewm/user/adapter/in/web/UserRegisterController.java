@@ -25,7 +25,7 @@ public class UserRegisterController {
 
     @PostMapping("/register")
     public ResponseEntity<ReturnObject> registerUser(
-            @Validated @RequestBody RegisterUserRequest registerUserRequest
+            @RequestBody RegisterUserRequest registerUserRequest
     ) {
         User user = registerUserUseCase.registerUser(registerUserRequest);
         RegisterUserResponse response = userResponseMapper.mapToRegisterUserResponse(user);
