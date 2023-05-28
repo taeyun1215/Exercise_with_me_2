@@ -4,6 +4,7 @@ import dev.ewm.global.baseEntity.BaseTimeEntity;
 import dev.ewm.mate.adapter.out.persistence.MateJpaEntity;
 import dev.ewm.matePost.adapter.in.request.ModifyMatePostRequest;
 import dev.ewm.matePost.adapter.out.persistence.MatePostJpaEntity;
+import dev.ewm.user.adapter.out.persistence.UserJpaEntity;
 import dev.ewm.user.domain.User;
 import lombok.*;
 
@@ -29,7 +30,9 @@ public class MatePost extends BaseTimeEntity implements Serializable {
     private List<Long> mateIds;
 
     public MatePostJpaEntity toJpaEntity(User user) {
-        return MatePostJpaEntity.builder()
+        user.addMatePosts();
+
+        MatePostJpaEntity matePostJpaEntity = MatePostJpaEntity.builder()
                 .id(matePostId)
                 .title(title)
                 .content(content)
@@ -40,6 +43,10 @@ public class MatePost extends BaseTimeEntity implements Serializable {
                 .endTime(endTime)
                 .user(user.toJpaEntity())
                 .build();
+
+        userJpaEntity.getMatePosts().add(matePostJpaEntity);
+
+        return matePostJpaEntity;
     }
 
     public void updateMatePost(ModifyMatePostRequest modifyMatePostRequest) {

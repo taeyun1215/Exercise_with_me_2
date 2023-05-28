@@ -6,15 +6,12 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dev.ewm.configure.LocalTimeSerializer;
+import dev.ewm.configure.OptionalTypeAdapter;
 import dev.ewm.matePost.adapter.out.persistence.MatePostJpaEntity;
 import dev.ewm.matePost.adapter.out.persistence.MatePostJpaRepo;
-import dev.ewm.matePost.domain.MatePost;
 import dev.ewm.matePost.adapter.in.request.CreateMatePostRequest;
-import dev.ewm.matePost.adapter.in.request.ModifyMatePostRequest;
-import dev.ewm.matePost.adapter.in.request.SearchRequireMatePostRequest;
 import dev.ewm.user.adapter.out.persistence.UserJpaEntity;
 import dev.ewm.user.adapter.out.persistence.UserJpaRepo;
-import dev.ewm.user.domain.User;
 import dev.ewm.user.domain.constant.Role;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @Transactional
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class MateJpaEntityPostControllerTest {
+public class MatePostControllerTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -59,7 +56,7 @@ public class MateJpaEntityPostControllerTest {
                 .username("test111")
                 .password(passwordEncoder.encode("비밀번호486!"))
                 .nickname("test")
-                .phone("010-2415-6806")
+                .phone("111-2222-3333")
                 .email("test@naver.com")
                 .role(Role.USER)
                 .build();
@@ -100,13 +97,19 @@ public class MateJpaEntityPostControllerTest {
         );
 
         Optional<UserJpaEntity> userJpaEntity = userJpaRepo.findById(1L);
+//
+//        GsonBuilder gsonBuilder = new GsonBuilder();
+//        gsonBuilder.registerTypeAdapter(LocalTime.class, new LocalTimeSerializer());
+//        Gson gson = gsonBuilder.setPrettyPrinting().create();
 
-        // ObjectMapper 인스턴스 생성 및 JavaTimeModule 등록
-        ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .registerTypeAdapter(LocalTime.class, new LocalTimeSerializer())
+                .registerTypeAdapter(Optional.class, new OptionalTypeAdapter())
+                .create();
 
-        // LocalTimeSerializer 등록
-        SimpleModule simpleModule = new SimpleModule().addSerializer(LocalTime.class, new LocalTimeSerializer());
-        objectMapper.registerModule(simpleModule);
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
 
         // When
         final ResultActions resultActions = mockMvc.perform(
@@ -127,7 +130,7 @@ public class MateJpaEntityPostControllerTest {
                 .andExpect(jsonPath("$.data.endTime", is("16:00:00")))
                 .andExpect(jsonPath("$.data.user.username", is("test111")))
                 .andExpect(jsonPath("$.data.user.nickname", is("test")))
-                .andExpect(jsonPath("$.data.user.phone", is("010-2415-6806")))
+                .andExpect(jsonPath("$.data.user.phone", is("111-2222-3333")))
                 .andExpect(jsonPath("$.data.user.email", is("test@naver.com")))
                 .andExpect(jsonPath("$.data.user.role", is("USER")));
     }

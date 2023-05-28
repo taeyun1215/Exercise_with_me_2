@@ -3,6 +3,8 @@ package dev.ewm.user.adapter.out.persistence;
 import javax.persistence.*;
 
 import dev.ewm.global.baseEntity.BaseTimeEntity;
+import dev.ewm.mate.adapter.out.persistence.MateJpaEntity;
+import dev.ewm.matePost.adapter.out.persistence.MatePostJpaEntity;
 import dev.ewm.user.domain.constant.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,6 +12,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -40,5 +43,11 @@ public class UserJpaEntity extends BaseTimeEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
+
+    @OneToMany(
+            targetEntity = MatePostJpaEntity.class, mappedBy = "user",
+            cascade = CascadeType.ALL, fetch = FetchType.LAZY
+    )
+    private List<MatePostJpaEntity> matePosts;
 
 }

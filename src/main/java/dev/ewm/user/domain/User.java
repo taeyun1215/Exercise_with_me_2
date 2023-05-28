@@ -6,6 +6,7 @@ import dev.ewm.user.domain.constant.Role;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Getter
 @Builder
@@ -19,6 +20,8 @@ public class User extends BaseTimeEntity implements Serializable {
     private String phone;
     private String email;
     private Role role;
+
+    private List<Long> matePostIds;
 
     public UserJpaEntity toJpaEntity() {
         return UserJpaEntity.builder()
@@ -39,4 +42,9 @@ public class User extends BaseTimeEntity implements Serializable {
     public void updateUsername(String username) {
         this.username = username;
     }
+
+    public void addMatePosts(Long matePostId) {
+        matePostIds.add(matePostId);
+    }
+
 }

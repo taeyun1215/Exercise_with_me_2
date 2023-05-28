@@ -5,6 +5,8 @@ import dev.ewm.matePost.adapter.in.request.CreateMatePostRequest;
 import dev.ewm.matePost.application.port.in.usecase.CreateMatePostUseCase;
 import dev.ewm.matePost.application.port.out.SaveMatePostPort;
 import dev.ewm.matePost.domain.MatePost;
+import dev.ewm.user.adapter.out.persistence.UserJpaEntity;
+import dev.ewm.user.application.port.out.LoadUserPort;
 import dev.ewm.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
