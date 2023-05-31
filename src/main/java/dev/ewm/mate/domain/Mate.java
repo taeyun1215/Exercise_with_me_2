@@ -24,8 +24,8 @@ public class Mate extends BaseTimeEntity implements Serializable {
         return MateJpaEntity.builder()
                 .id(mateId)
                 .type(type)
-                .user(user.toJpaEntity())
-                .matePost(matePost.toJpaEntity(user))
+                .userId(user.getUserId())
+                .matePostId(matePost.getMatePostId())
                 .build();
     }
 

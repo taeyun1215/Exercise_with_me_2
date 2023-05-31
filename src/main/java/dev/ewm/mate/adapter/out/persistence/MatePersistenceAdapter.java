@@ -36,6 +36,6 @@ public class MatePersistenceAdapter implements
 
     @Override
     public Mate existMate(MatePost matePost, User user) {
-        return matePersistenceMapper.mapToDomainEntity(mateJpaRepo.findByMatePostAndUser(matePost, user).get());
+        return matePersistenceMapper.mapToDomainEntity(mateJpaRepo.findByMatePostIdAndUserId(matePost.getMatePostId(), user.getUserId()).get());
     }
 }

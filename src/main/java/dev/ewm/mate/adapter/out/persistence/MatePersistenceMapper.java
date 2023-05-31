@@ -12,8 +12,8 @@ public class MatePersistenceMapper {
         return Mate.builder()
                 .mateId(mateJpaEntity.getId())
                 .type(mateJpaEntity.getType())
-                .userId(mateJpaEntity.getUser().getId())
-                .matePostId(mateJpaEntity.getMatePost().getId())
+                .userId(mateJpaEntity.getUserId())
+                .matePostId(mateJpaEntity.getMatePostId())
                 .build();
     }
 

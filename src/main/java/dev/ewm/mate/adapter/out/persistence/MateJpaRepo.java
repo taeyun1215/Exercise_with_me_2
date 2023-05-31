@@ -9,8 +9,8 @@ import java.util.Optional;
 
 public interface MateJpaRepo extends JpaRepository<MateJpaEntity, Long> {
 
-    Optional<MateJpaEntity> findByMatePostAndUser(MatePost matePost, User user);
+    Optional<MateJpaEntity> findByMatePostIdAndUserId(Long matePostId, Long userId);
 
-    List<MateJpaEntity> findByMatePost(MatePost matePost);
+//    List<MateJpaEntity> findByMatePost(MatePost matePost);
 
 }

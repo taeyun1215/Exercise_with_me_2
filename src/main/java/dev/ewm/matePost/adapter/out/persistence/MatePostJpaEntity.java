@@ -51,14 +51,13 @@ public class MatePostJpaEntity extends BaseTimeEntity {
     @Column(columnDefinition = "integer default 0", nullable = false)
     private int view = 0; // 조회수
 
-    @ManyToOne(targetEntity = UserJpaEntity.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "username", referencedColumnName = "username")
-    private UserJpaEntity user;
+    @Column(name = "user_id")
+    private Long userId;
 
-    @OneToMany(
-            targetEntity = MateJpaEntity.class, mappedBy = "matePost",
-            cascade = CascadeType.ALL, fetch = FetchType.LAZY
-    )
-    private List<MateJpaEntity> mates;
+    @ElementCollection
+    @CollectionTable(name = "mate_post_mate",
+            joinColumns = @JoinColumn(name = "mate_post_id"))
+    @Column(name = "mate_ids")
+    private List<Long> mateIds;
 
 }

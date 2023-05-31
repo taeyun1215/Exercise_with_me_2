@@ -30,9 +30,7 @@ public class MatePost extends BaseTimeEntity implements Serializable {
     private List<Long> mateIds;
 
     public MatePostJpaEntity toJpaEntity(User user) {
-        user.addMatePosts();
-
-        MatePostJpaEntity matePostJpaEntity = MatePostJpaEntity.builder()
+        return MatePostJpaEntity.builder()
                 .id(matePostId)
                 .title(title)
                 .content(content)
@@ -41,12 +39,8 @@ public class MatePost extends BaseTimeEntity implements Serializable {
                 .view(view)
                 .startTime(startTime)
                 .endTime(endTime)
-                .user(user.toJpaEntity())
+                .userId(user.getUserId())
                 .build();
-
-        userJpaEntity.getMatePosts().add(matePostJpaEntity);
-
-        return matePostJpaEntity;
     }
 
     public void updateMatePost(ModifyMatePostRequest modifyMatePostRequest) {

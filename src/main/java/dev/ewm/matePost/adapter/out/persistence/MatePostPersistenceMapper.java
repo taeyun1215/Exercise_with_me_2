@@ -14,9 +14,9 @@ import java.util.stream.Collectors;
 public class MatePostPersistenceMapper {
 
     public MatePost mapToDomainEntity(MatePostJpaEntity matePostJpaEntity) {
-        List<Long> mateIds = matePostJpaEntity.getMates().stream()
-                .map(MateJpaEntity::getId)
-                .collect(Collectors.toList());
+//        List<Long> mateIds = matePostJpaEntity.getMates().stream()
+//                .map(MateJpaEntity::getId)
+//                .collect(Collectors.toList());
 
         return MatePost.builder()
                 .matePostId(matePostJpaEntity.getId())
@@ -27,8 +27,8 @@ public class MatePostPersistenceMapper {
                 .view(matePostJpaEntity.getView())
                 .startTime(matePostJpaEntity.getStartTime())
                 .endTime(matePostJpaEntity.getEndTime())
-                .userId(matePostJpaEntity.getUser().getId())
-                .mateIds(mateIds)
+                .userId(matePostJpaEntity.getUserId())
+                .mateIds(matePostJpaEntity.getMateIds())
                 .build();
     }
 

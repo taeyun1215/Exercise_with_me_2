@@ -25,12 +25,10 @@ public class MateJpaEntity extends BaseTimeEntity {
     @Column(nullable = false)
     private Type type;
 
-    @ManyToOne(targetEntity = UserJpaEntity.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "username", referencedColumnName = "username")
-    private UserJpaEntity user;
+    @Column(name = "user_id")
+    private Long userId;
 
-    @ManyToOne(targetEntity = MatePostJpaEntity.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "matePostId")
-    private MatePostJpaEntity matePost;
+    @Column(name = "mate_post_id")
+    private Long matePostId;
 
 }
