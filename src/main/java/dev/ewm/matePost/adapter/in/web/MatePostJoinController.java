@@ -28,7 +28,7 @@ public class MatePostJoinController {
 
         ReturnObject returnObject = ReturnObject.builder()
                 .success(true)
-                .data("")
+                .data("운동에 조인하셨습니다.")
                 .build();
 
         return ResponseEntity.status(HttpStatus.OK).body(returnObject);
