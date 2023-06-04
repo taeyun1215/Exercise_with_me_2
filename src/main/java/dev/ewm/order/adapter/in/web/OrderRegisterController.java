@@ -2,7 +2,7 @@ package dev.ewm.order.adapter.in.web;
 
 import dev.ewm.global.annotation.LoginUser;
 import dev.ewm.global.utils.ReturnObject;
-import dev.ewm.order.adapter.in.request.OrderRequest;
+import dev.ewm.order.adapter.in.request.OrderRegisterRequest;
 import dev.ewm.order.application.port.in.RegisterOrderUseCase;
 import dev.ewm.user.domain.User;
 import lombok.RequiredArgsConstructor;
@@ -20,10 +20,9 @@ public class OrderRegisterController {
     @PostMapping("/add/{productId}")
     public ResponseEntity<ReturnObject> AddStock(
             @LoginUser User user,
-            @PathVariable("productId") Long productId,
-            @RequestBody OrderRequest addStockRequest
+            @RequestBody OrderRegisterRequest orderRegisterRequest
     ) {
-        addStockUseCase.AddStock(productId, addStockRequest);
+        registerOrderUseCase.registerOrder(user, orderRegisterRequest);
 
         ReturnObject returnObject = ReturnObject.builder()
                 .success(true)

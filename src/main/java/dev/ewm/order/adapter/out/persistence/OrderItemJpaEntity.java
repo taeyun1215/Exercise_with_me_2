@@ -22,9 +22,9 @@ public class OrderItemJpaEntity extends BaseTimeEntity implements Serializable {
     private Long id;
 
     private Long productId;
-
-    private int price;
-
     private int count;
+
+    private Long OrderId;
+
 
 }

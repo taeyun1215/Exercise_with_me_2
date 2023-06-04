@@ -13,7 +13,7 @@ import java.util.List;
 
 @Value
 @EqualsAndHashCode(callSuper = false)
-public class OrderRequest extends SelfValidating<OrderRequest> {
+public class OrderRegisterRequest extends SelfValidating<OrderRegisterRequest> {
 
     @NotBlank(message = "이름은 필수 입력 값입니다.")
     private String receiverName;
@@ -24,14 +24,19 @@ public class OrderRequest extends SelfValidating<OrderRequest> {
     @NotBlank(message = "주소는 필수 입력 값입니다.")
     private String receiverAddress;
 
-    public OrderRequest(
+    @NotBlank(message = "상품은 필수 입력 값입니다.")
+    private List<OrderItemRegisterRequest> orderItemRegisterRequests;
+
+    public OrderRegisterRequest(
             String receiverName,
             String receiverPhone,
-            String receiverAddress
+            String receiverAddress,
+            List<OrderItemRegisterRequest> orderItemRegisterRequests
     ) {
         this.receiverName = receiverName;
         this.receiverPhone = receiverPhone;
         this.receiverAddress = receiverAddress;
+        this.orderItemRegisterRequests = orderItemRegisterRequests;
         this.validateSelf();
     }
 

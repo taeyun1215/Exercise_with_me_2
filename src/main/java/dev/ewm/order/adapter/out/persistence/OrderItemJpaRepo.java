@@ -1,4 +1,6 @@
 package dev.ewm.order.adapter.out.persistence;
 
-public class OrderItemJpaRepo {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface OrderItemJpaRepo extends JpaRepository<OrderItemJpaEntity, Long> {
 }

@@ -13,16 +13,20 @@ import lombok.Getter;
 public class Stock {
 
     private Long stockId;
-    private int quantity;
 
     private Long productId;
+    private int quantity;
 
     public StockJpaEntity toJpaEntity() {
         return StockJpaEntity.builder()
                 .id(stockId)
-                .quantity(quantity)
                 .productId(productId)
+                .quantity(quantity)
                 .build();
+    }
+
+    public void reduceStock(int quantity) {
+        this.quantity -= quantity;
     }
 
 }
