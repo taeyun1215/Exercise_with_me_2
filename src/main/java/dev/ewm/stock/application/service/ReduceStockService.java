@@ -4,6 +4,7 @@ import dev.ewm.global.annotation.UseCase;
 import dev.ewm.order.domain.OrderItem;
 import dev.ewm.stock.application.port.in.ReduceStockUseCase;
 import dev.ewm.stock.application.port.out.LoadStockPort;
+import dev.ewm.stock.application.port.out.SaveStockPort;
 import dev.ewm.stock.domain.Stock;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,20 +20,19 @@ import java.util.List;
 public class ReduceStockService implements ReduceStockUseCase {
 
     private final LoadStockPort loadStockPort;
+    private final SaveStockPort saveStockPort;
 
     @Override
-    public void reduceStock(List<OrderItem> orderItems) {
-        for (OrderItem orderItem : orderItems) {
-            Stock stock = loadStockPort.loadStock(orderItem.getProductId());
-            if (stock == null) {
-                throw new EntityNotFoundException("상품이 없습니다.");
-            }
-            if (stock.getQuantity() < orderItem.getCount()) {
-                throw new RuntimeException("수량이 없습니다.");
-            } else {
-                stock.reduceStock(orderItem.getCount());
-            }
+    public void reduceStock(OrderItem orderItem) {
+        Stock stock = loadStockPort.loadStock(orderItem.getProductId());
+        if (stock == null) {
+            throw new EntityNotFoundException("상품이 없습니다.");
+        }
+        if (stock.getQuantity() < orderItem.getCount()) {
+            throw new RuntimeException("수량이 없습니다.");
+        } else {
+            stock.reduceStock(orderItem.getCount());
+            saveStockPort.saveStock(stock);
         }
     }
-
 }

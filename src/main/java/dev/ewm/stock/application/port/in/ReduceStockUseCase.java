@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface ReduceStockUseCase {
 
-    void reduceStock(List<OrderItem> orderItems);
+    void reduceStock(OrderItem orderItem);
 
 }

@@ -8,7 +8,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class OrderItem {
 
     private Long orderItemId;

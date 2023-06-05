@@ -11,8 +11,8 @@ import lombok.RequiredArgsConstructor;
 public class StockPersistenceAdapter implements
         SaveStockPort, LoadStockPort {
 
-    private StockJpaRepo stockJpaRepo;
-    private StockPersistenceMapper stockPersistenceMapper;
+    private final StockJpaRepo stockJpaRepo;
+    private final StockPersistenceMapper stockPersistenceMapper;
 
     @Override
     public void saveStock(Stock stock) {

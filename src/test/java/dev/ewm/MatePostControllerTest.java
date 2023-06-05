@@ -71,7 +71,7 @@ public class MatePostControllerTest {
                 .view(0)
                 .startTime(LocalTime.parse("15:00:00"))
                 .endTime(LocalTime.parse("16:00:00"))
-                .user(user)
+                .userId(user.getId())
                 .build();
 
         matePostJpaRepo.save(matePost);

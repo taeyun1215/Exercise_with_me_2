@@ -35,11 +35,12 @@ public class RegisterOrderService implements RegisterOrderUseCase {
             OrderItem orderItem = orderItemRegisterRequest.toEntity();
             orderItems.add(orderItem);
         }
-
         Order order = orderRegisterRequest.toEntity(orderItems, user);
-
         validateOrder(order);
-        reduceStockUseCase.reduceStock(orderItems);
+
+        for (OrderItem orderItem : orderItems) {
+            reduceStockUseCase.reduceStock(orderItem);
+        }
         save(order, orderItems);
     }
 

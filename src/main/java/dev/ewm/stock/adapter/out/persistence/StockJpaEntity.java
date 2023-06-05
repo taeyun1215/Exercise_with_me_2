@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "product_inventory")
+@Table(name = "product_stock")
 @Data
 @Builder
 @AllArgsConstructor
