@@ -57,16 +57,15 @@ public class RedissonLockFacadeTest {
         CountDownLatch latch = new CountDownLatch(threadCount);
 
         //when
-        IntStream.range(0,100).forEach(e -> executorService.submit(()->{
-            try{
+        IntStream.range(0,100).forEach(e -> executorService.submit( () -> {
+            try {
                 redissonLockStockFacade.reduceStock(orderItem);
-            } catch(InterruptedException ex) {
+            } catch (InterruptedException ex) {
                 throw new RuntimeException(ex);
-            }finally {
+            } finally {
                 latch.countDown();
             }
         }));
-
         latch.await();
 
         StockJpaEntity stock = stockJpaRepo.findByProductId(1L);

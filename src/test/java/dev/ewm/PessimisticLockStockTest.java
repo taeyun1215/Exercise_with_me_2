@@ -3,7 +3,8 @@ package dev.ewm;
 import dev.ewm.order.domain.OrderItem;
 import dev.ewm.stock.adapter.out.persistence.StockJpaEntity;
 import dev.ewm.stock.adapter.out.persistence.StockJpaRepo;
-import dev.ewm.stock.application.port.in.ReduceStockUseCase;
+import dev.ewm.stock.config.OptimisticLockStockFacade;
+import dev.ewm.stock.config.PessimisticLockStockFacade;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -11,10 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -25,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class StockControllerTest {
+public class PessimisticLockStockTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -34,13 +32,12 @@ public class StockControllerTest {
     private StockJpaRepo stockJpaRepo;
 
     @Autowired
-    private ReduceStockUseCase reduceStockUseCase;
+    private PessimisticLockStockFacade pessimisticLockStockFacade;
 
     @Autowired
     private PlatformTransactionManager transactionManager;
 
     OrderItem orderItem;
-    List<OrderItem> orderList = new ArrayList<>();
 
     @BeforeEach
     public void init() {
@@ -59,24 +56,25 @@ public class StockControllerTest {
     public void AtTheSameTime_100Requests() throws InterruptedException {
         //given
         int threadCount = 100;
-        ExecutorService executorService = Executors.newFixedThreadPool(2);
+        ExecutorService executorService = Executors.newFixedThreadPool(32);
         CountDownLatch latch = new CountDownLatch(threadCount);
 
-        // when
+        //when
         IntStream.range(0,100).forEach(e -> executorService.submit(() -> {
             try {
                 TransactionStatus status =  transactionManager.getTransaction(null);
-                reduceStockUseCase.reduceStock(orderItem);
+                pessimisticLockStockFacade.reduceStock(orderItem);
                 transactionManager.commit(status);
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
             } finally {
                 latch.countDown();
             }
         }));
+
         latch.await();
 
-        // then
         StockJpaEntity stock = stockJpaRepo.findByProductId(1L);
         assertEquals(0L, stock.getQuantity());
     }
-
 }

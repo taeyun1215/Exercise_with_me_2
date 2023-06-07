@@ -2,6 +2,9 @@ package dev.ewm.stock.application.service;
 
 import dev.ewm.global.annotation.UseCase;
 import dev.ewm.order.domain.OrderItem;
+import dev.ewm.stock.adapter.out.persistence.StockJpaEntity;
+import dev.ewm.stock.adapter.out.persistence.StockJpaRepo;
+import dev.ewm.stock.adapter.out.persistence.StockPersistenceMapper;
 import dev.ewm.stock.application.port.in.ReduceStockUseCase;
 import dev.ewm.stock.application.port.out.LoadStockPort;
 import dev.ewm.stock.application.port.out.SaveStockPort;
@@ -22,9 +25,15 @@ public class ReduceStockService implements ReduceStockUseCase {
     private final LoadStockPort loadStockPort;
     private final SaveStockPort saveStockPort;
 
+    private final StockJpaRepo stockJpaRepo;
+    private final StockPersistenceMapper stockPersistenceMapper;
+
     @Override
     public void reduceStock(OrderItem orderItem) {
         Stock stock = loadStockPort.loadStock(orderItem.getProductId());
+//        Stock stock = stockPersistenceMapper.mapToDomainEntity(stockJpaRepo.findByProductIdWithOptimisticLock(orderItem.getProductId()));
+//        Stock stock = stockPersistenceMapper.mapToDomainEntity(stockJpaRepo.findByProductIdWithPessimisticLock(orderItem.getProductId()));
+
         if (stock == null) {
             throw new EntityNotFoundException("상품이 없습니다.");
         }

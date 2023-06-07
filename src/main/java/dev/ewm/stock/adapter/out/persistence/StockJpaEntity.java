@@ -1,10 +1,7 @@
 package dev.ewm.stock.adapter.out.persistence;
 
 import dev.ewm.global.baseEntity.BaseTimeEntity;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -25,5 +22,14 @@ public class StockJpaEntity extends BaseTimeEntity implements Serializable {
 
     @Column(name = "product_id")
     private Long productId;
+
+//    @Version
+//    private Long version; // 낙관락을 사용하기 위함
+
+//    public StockJpaEntity(Long id, int quantity, Long productId) {
+//        this.id = id;
+//        this.productId = productId;
+//        this.quantity = quantity;
+//    }
 
 }
