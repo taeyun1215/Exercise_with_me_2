@@ -7,7 +7,7 @@
 #    password: 6548
 
 server:
-  port: 8082
+  port: 0
 
 spring:
   application:
@@ -69,4 +69,4 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://127.0.0.1:8761/eureka
+      defaultZone: http://localhost:8761/eureka
